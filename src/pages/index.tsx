@@ -11,7 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Link href={"/shop"}>Go to shop</Link>
+        <Link href={"/users"}>See the users</Link>
       </main>
     </>
   );
