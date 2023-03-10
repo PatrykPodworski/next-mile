@@ -11,7 +11,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Link href={"/users"}>See the users</Link>
+        <div className="flex flex-col justify-center items-center h-screen mb-2">
+          <p className="text-xl font-bold text-green-500">
+            This is the index page.
+          </p>
+          <Link href={"/users"}>See the users</Link>
+        </div>
       </main>
     </>
   );
