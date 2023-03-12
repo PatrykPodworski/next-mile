@@ -3,7 +3,9 @@ import { Html, Head, Main, NextScript } from "next/document";
 export default function Document() {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+        <meta name="description" content="Get access to the best e-learning" />
+      </Head>
       <body className="bg-gray-50 antialiased">
         <Main />
         <NextScript />
