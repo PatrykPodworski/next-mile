@@ -7,14 +7,14 @@ const Courses = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => (
     <Head>
       <title>Courses list</title>
     </Head>
-    <div className="flex flex-col">
+    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
       {data.map((x) => (
-        <Fragment key={x.id}>
+        <li key={x.id}>
           <p className="text-xl font-bold text-amber-500">{x.title}</p>
           <p className="text-base text-black">{x.description}</p>
-        </Fragment>
+        </li>
       ))}
-    </div>
+    </ul>
   </>
 );
 
