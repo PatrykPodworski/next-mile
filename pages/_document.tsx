@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <meta name="description" content="Get access to the best e-learning" />
       </Head>
-      <body className="bg-gray-50 antialiased">
+      <body className="bg-neutral-100 antialiased">
         <Main />
         <NextScript />
       </body>
