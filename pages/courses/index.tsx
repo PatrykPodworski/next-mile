@@ -32,8 +32,8 @@ export const getStaticProps = async () => {
 
 export default Courses;
 
-type CoursesApiResponse = {
-  id: number;
+export type CoursesApiResponse = {
+  id: string;
   title: string;
   price: number;
   description: string;
