@@ -22,7 +22,7 @@ const Courses = () => {
       {isError && <h2 className="text-3xl text-red-700">Error</h2>}
       {data && (
         <>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-7">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-7 mb-8">
             {data.slice(0, 8).map((x) => (
               <Course key={x.id} {...x} />
             ))}

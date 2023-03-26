@@ -10,7 +10,7 @@ const Pagination = ({
   handlePrevious,
 }: PaginationProps) => {
   return (
-    <ul className="flex gap-1 items-center">
+    <ul className="btn-group w-full justify-center">
       <PaginationItem onClick={handlePrevious}>
         <ChevronLeft />
       </PaginationItem>

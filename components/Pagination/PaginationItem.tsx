@@ -2,15 +2,12 @@ import clsx from "clsx";
 import { ReactNode } from "react";
 
 const PaginationItem = ({ children, active, onClick }: PaginationItemProps) => (
-  <li
+  <button
     onClick={onClick}
-    className={clsx(
-      "text-lg text-neutral-900 border-neutral-900 p-2 hover:bg-blue-100 transition-colors duration-300",
-      active ? "border-b-2" : "cursor-pointer"
-    )}
+    className={clsx("btn btn-ghost", active && "btn-active")}
   >
     {children}
-  </li>
+  </button>
 );
 type PaginationItemProps = {
   children: ReactNode;
