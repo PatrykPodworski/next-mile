@@ -23,7 +23,9 @@ const isActiveRoute = (route: string, href: string) => {
     return href === route;
   }
 
-  return route.startsWith(href);
+  const mainRoutePart = route.split("/")[1] ?? "";
+  const mainHrefPart = href.split("/")[1] ?? "";
+  return mainRoutePart === mainHrefPart;
 };
 
 type NavigationLinkProps = {

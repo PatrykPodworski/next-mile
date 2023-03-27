@@ -1,4 +1,6 @@
 import ChevronLeft from "@/components/icons/ChevronLeft";
+import courseFetcher from "@/services/courses/courseFetcher";
+import courseListFetcher from "@/services/courses/courseListFetcher";
 import {
   GetStaticPaths,
   GetStaticPropsContext,
@@ -7,7 +9,6 @@ import {
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { CoursesApiResponse } from ".";
 
 const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   if (!data) {
@@ -20,7 +21,7 @@ const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
         <title>{data.title}</title>
       </Head>
       <Link
-        href={"/courses"}
+        href={"/courses/page/1"}
         className="flex gap-2 text-base text-blue-300 hover:text-blue-500 transition-all duration-300 items-center"
       >
         <ChevronLeft className="w-4 h-4" /> Go back
@@ -48,8 +49,7 @@ const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
 };
 
 export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
-  const response = await fetch("https://naszsklep-api.vercel.app/api/products");
-  const data: CoursesApiResponse[] = await response.json();
+  const data = await courseListFetcher();
 
   return {
     paths: data.map((x) => ({
@@ -57,7 +57,7 @@ export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
         id: x.id,
       },
     })),
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
@@ -70,26 +70,14 @@ export const getStaticProps = async ({
       notFound: true,
     };
   }
-  const response = await fetch(
-    `https://naszsklep-api.vercel.app/api/products/${params?.id}`
-  );
-  const data: CourseDetailsResponse | undefined = await response.json();
+
+  const data = await courseFetcher(params.id);
 
   return {
     props: {
       data,
     },
   };
-};
-
-type CourseDetailsResponse = {
-  id: string;
-  title: string;
-  price: number;
-  description: string;
-  longDescription: string;
-  category: string;
-  image: string;
 };
 
 export default Course;
