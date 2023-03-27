@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Course = ({ id, image, title, category, rating, price }: CourseProps) => (
   <li className="shadow-lg bg-neutral-50 overflow-hidden">
-    <Link href={`courses/${id}`}>
+    <Link href={`/courses/${id}`}>
       <div className="relative aspect-video">
         <Image src={image} alt={title} fill className="object-cover" />
       </div>
