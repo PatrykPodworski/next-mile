@@ -1,11 +1,13 @@
-import Course from "@/components/Courses/Course";
+import ErrorMessage from "@/components/ErrorMessage";
+import LoadingIndicator from "@/components/LoadingIndicator";
 import Pagination from "@/components/Pagination";
 import usePagination from "@/components/Pagination/usePagination";
 import courseListFetcher from "@/services/courses/courseListFetcher";
 import Head from "next/head";
 import { useQuery } from "react-query";
+import CourseList from "../components/Courses/CourseList";
 
-const Courses = () => {
+const DealsPage = () => {
   const { currentPage, ...props } = usePagination(0, 10);
   const { data, isLoading, isError } = useQuery(
     ["courseList", currentPage],
@@ -18,15 +20,11 @@ const Courses = () => {
         <title>Hot deals</title>
       </Head>
       <h1 className="text-4xl font-bold my-8 text-neutral-900">Hot deals</h1>
-      {isLoading && <h2 className="text-3xl text-neutral-700">Loading...</h2>}
-      {isError && <h2 className="text-3xl text-red-700">Error</h2>}
+      {isLoading && <LoadingIndicator />}
+      {isError && <ErrorMessage />}
       {data && (
         <>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-7 mb-8">
-            {data.slice(0, 8).map((x) => (
-              <Course key={x.id} {...x} />
-            ))}
-          </ul>
+          <CourseList courses={data} />
           <Pagination current={currentPage} {...props} />
         </>
       )}
@@ -34,4 +32,4 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default DealsPage;

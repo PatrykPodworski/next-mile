@@ -2,7 +2,14 @@ import Rating from "./Rating";
 import Image from "next/image";
 import Link from "next/link";
 
-const Course = ({ id, image, title, category, rating, price }: CourseProps) => (
+const CourseCard = ({
+  id,
+  image,
+  title,
+  category,
+  rating,
+  price,
+}: CourseCardProps) => (
   <li className="shadow-lg bg-neutral-50 overflow-hidden">
     <Link href={`/courses/${id}`}>
       <div className="relative aspect-video">
@@ -20,7 +27,7 @@ const Course = ({ id, image, title, category, rating, price }: CourseProps) => (
   </li>
 );
 
-type CourseProps = {
+export type CourseCardProps = {
   id: string;
   title: string;
   image: string;
@@ -29,4 +36,4 @@ type CourseProps = {
   price: number;
 };
 
-export default Course;
+export default CourseCard;

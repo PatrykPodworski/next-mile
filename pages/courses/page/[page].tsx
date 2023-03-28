@@ -1,4 +1,4 @@
-import Course from "@/components/Courses/Course";
+import CourseCard from "@/components/Courses/CourseCard";
 import LinkPagination from "@/components/Pagination/LinkPagination";
 import courseListFetcher from "@/services/courses/courseListFetcher";
 import {
@@ -26,7 +26,7 @@ const Courses = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
       </h1>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-7">
         {data.slice(0, 8).map((x) => (
-          <Course key={x.id} {...x} />
+          <CourseCard key={x.id} {...x} />
         ))}
       </ul>
       <LinkPagination
