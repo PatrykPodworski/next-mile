@@ -27,12 +27,14 @@ const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
         <ChevronLeft className="w-4 h-4" /> Go back
       </Link>
       <div className="flex gap-4 my-8">
-        <div className="relative aspect-video w-80 shadow-xl overflow-hidden">
+        <div className="aspect-video bg-white p-2 shadow-xl">
           <Image
             src={data.image}
             alt={data.title}
-            fill
-            className="object-cover"
+            width={16}
+            height={9}
+            className="object-contain h-full w-auto mx-auto"
+            sizes="100vw"
           />
         </div>
         <div>
@@ -52,7 +54,7 @@ export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
   const data = await courseListFetcher();
 
   return {
-    paths: data.map((x) => ({
+    paths: data.slice(0, 8).map((x) => ({
       params: {
         id: x.id,
       },
