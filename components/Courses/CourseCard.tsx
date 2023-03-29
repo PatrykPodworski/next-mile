@@ -1,6 +1,6 @@
 import Rating from "./Rating";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "@/components/Image";
 
 const CourseCard = ({
   id,
@@ -12,9 +12,7 @@ const CourseCard = ({
 }: CourseCardProps) => (
   <li className="shadow-lg bg-neutral-50 overflow-hidden">
     <Link href={`/courses/${id}`}>
-      <div className="relative aspect-video">
-        <Image src={image} alt={title} fill className="object-cover" />
-      </div>
+      <Image src={image} alt={title} />
       <div className="p-3">
         <section className="flex justify-between items-center">
           <p className="text-sm text-neutral-500">{category}</p>

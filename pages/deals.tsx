@@ -19,7 +19,7 @@ const DealsPage = () => {
       <Head>
         <title>Hot deals</title>
       </Head>
-      <h1 className="text-4xl font-bold my-8 text-neutral-900">Hot deals</h1>
+      <h1 className="text-4xl font-bold my-4 text-neutral-900">Hot deals</h1>
       {isLoading && <LoadingIndicator />}
       {isError && <ErrorMessage />}
       {data && (
