@@ -1,13 +1,18 @@
 import Rating from "./Rating";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "@/components/Image";
 
-const Course = ({ id, image, title, category, rating, price }: CourseProps) => (
+const CourseCard = ({
+  id,
+  image,
+  title,
+  category,
+  rating,
+  price,
+}: CourseCardProps) => (
   <li className="shadow-lg bg-neutral-50 overflow-hidden">
     <Link href={`/courses/${id}`}>
-      <div className="relative aspect-video">
-        <Image src={image} alt={title} fill className="object-cover" />
-      </div>
+      <Image src={image} alt={title} />
       <div className="p-3">
         <section className="flex justify-between items-center">
           <p className="text-sm text-neutral-500">{category}</p>
@@ -20,7 +25,7 @@ const Course = ({ id, image, title, category, rating, price }: CourseProps) => (
   </li>
 );
 
-type CourseProps = {
+export type CourseCardProps = {
   id: string;
   title: string;
   image: string;
@@ -29,4 +34,4 @@ type CourseProps = {
   price: number;
 };
 
-export default Course;
+export default CourseCard;
