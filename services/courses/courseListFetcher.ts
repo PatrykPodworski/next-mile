@@ -1,7 +1,7 @@
 import qs from "qs";
 import ApiCourse from "./ApiCourse";
 
-const PAGE_SIZE = 25;
+const PAGE_SIZE = 16;
 
 const courseListFetcher = async (page: number = 0) => {
   const query = qs.stringify({ take: PAGE_SIZE, offset: page * PAGE_SIZE });
