@@ -1,4 +1,4 @@
-import CourseList from "@/components/Courses/CourseList";
+import CourseList from "@/components/Courses/List/CourseList";
 import LinkPagination from "@/components/Pagination/LinkPagination";
 import courseListFetcher from "@/services/courses/courseListFetcher";
 import {
