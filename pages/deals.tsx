@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { useQuery } from "react-query";
 import CourseListSkeleton from "@/components/Courses/List/CourseListSkeleton";
 import ErrorMessage from "@/components/ErrorMessage";
@@ -20,9 +19,6 @@ const DealsPage = () => {
 
   return (
     <>
-      <Head>
-        <title>Hot deals</title>
-      </Head>
       <h1 className="text-4xl font-bold my-4 text-neutral-900">Hot deals</h1>
       {isLoading || !data ? (
         <CourseListSkeleton />
