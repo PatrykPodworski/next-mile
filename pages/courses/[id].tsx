@@ -6,7 +6,7 @@ import {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
-import Head from "next/head";
+import { NextSeo } from "next-seo";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -17,9 +17,22 @@ const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
   return (
     <>
-      <Head>
-        <title>{data.title}</title>
-      </Head>
+      <NextSeo
+        title={data.title}
+        description={data.description}
+        canonical={`https://next-mile.vercel.app/courses/${data.id}`}
+        openGraph={{
+          url: `https://next-mile.vercel.app/courses/${data.id}`,
+          title: data.title,
+          images: [
+            {
+              url: data.image,
+              alt: data.title,
+              type: "image/jpeg",
+            },
+          ],
+        }}
+      />
       <Link
         href={"/courses/page/1"}
         className="flex gap-2 text-base text-blue-300 hover:text-blue-500 transition-all duration-300 items-center"
