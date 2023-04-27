@@ -1,23 +1,18 @@
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import Link from "next/link";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
-const Markdown = ({ children }: MarkdownProps) => (
-  <ReactMarkdown
+const Markdown = (props: MDXRemoteSerializeResult) => (
+  <MDXRemote
+    {...props}
     components={{
-      a: ({ node, href, ...props }) => {
+      a: ({ href, ref, ...props }) => {
         if (!href) {
-          return <a {...props} />;
+          return <a ref={ref} {...props} />;
         }
         return <Link href={href} {...props} />;
       },
     }}
-    className="prose lg:prose-xl"
-  >
-    {children}
-  </ReactMarkdown>
+  />
 );
-type MarkdownProps = {
-  children: string;
-};
 
 export default Markdown;

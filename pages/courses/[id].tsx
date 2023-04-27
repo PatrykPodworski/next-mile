@@ -10,6 +10,7 @@ import {
 import { NextSeo } from "next-seo";
 import Image from "next/image";
 import Link from "next/link";
+import { serialize } from "next-mdx-remote/serialize";
 
 const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   if (!data) {
@@ -59,7 +60,9 @@ const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
           <p className="text-lg text-neutral-700 italic">{`${data.price} zł`}</p>
         </div>
       </div>
-      <Markdown>{data.longDescription}</Markdown>
+      <article className="prose lg:prose-xl">
+        <Markdown {...data.longDescription} />
+      </article>
     </>
   );
 };
@@ -88,10 +91,9 @@ export const getStaticProps = async ({
   }
 
   const data = await courseFetcher(params.id);
-
   return {
     props: {
-      data,
+      data: { ...data, longDescription: await serialize(data.longDescription) },
     },
   };
 };
