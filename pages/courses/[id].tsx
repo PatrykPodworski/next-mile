@@ -1,3 +1,4 @@
+import Markdown from "@/components/Markdown";
 import ChevronLeft from "@/components/icons/ChevronLeft";
 import courseFetcher from "@/services/courses/courseFetcher";
 import courseListFetcher from "@/services/courses/courseListFetcher";
@@ -58,7 +59,7 @@ const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
           <p className="text-lg text-neutral-700 italic">{`${data.price} zł`}</p>
         </div>
       </div>
-      <p className="text-lg text-neutral-700">{data.longDescription}</p>
+      <Markdown>{data.longDescription}</Markdown>
     </>
   );
 };
