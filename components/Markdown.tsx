@@ -6,13 +6,15 @@ const Markdown = (props: MDXRemoteSerializeResult) => (
     {...props}
     components={{
       a: ({ href, ref, ...props }) => {
-        if (!href) {
-          return <a ref={ref} {...props} />;
+        if (!href || isExternalHref(href)) {
+          return <a ref={ref} {...props} rel="noopener noreferrer" />;
         }
         return <Link href={href} {...props} />;
       },
     }}
   />
 );
+
+const isExternalHref = (href: string) => href.startsWith("http");
 
 export default Markdown;
