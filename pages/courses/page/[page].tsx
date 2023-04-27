@@ -6,7 +6,6 @@ import {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
-import Head from "next/head";
 import { useRouter } from "next/router";
 
 const NUMBER_OF_PAGES = 4000 / 25;
@@ -18,9 +17,6 @@ const Courses = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
   return (
     <>
-      <Head>
-        <title>Courses list</title>
-      </Head>
       <h1 className="text-4xl font-bold my-4 text-neutral-900">
         Courses selected for you
       </h1>
