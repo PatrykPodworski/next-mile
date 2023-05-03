@@ -1,6 +1,5 @@
-import ShoppingBag from "@/components/icons/ShoppingBag";
 import NavigationLink from "./NavigationLink";
-import Link from "next/link";
+import CartLink from "./CartLink";
 
 const Navigation = () => {
   return (
@@ -12,9 +11,7 @@ const Navigation = () => {
           <NavigationLink href="/deals">Deals</NavigationLink>
           <NavigationLink href="/about">About</NavigationLink>
         </div>
-        <NavigationLink href="/cart">
-          <ShoppingBag />
-        </NavigationLink>
+        <CartLink />
       </div>
     </nav>
   );
