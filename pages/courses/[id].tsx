@@ -1,3 +1,4 @@
+import AddToCartButton from "@/components/Courses/Card/AddToCartButton";
 import Markdown from "@/components/Markdown";
 import ChevronLeft from "@/components/icons/ChevronLeft";
 import courseFetcher from "@/services/courses/courseFetcher";
@@ -7,10 +8,10 @@ import {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
+import { serialize } from "next-mdx-remote/serialize";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
 import Link from "next/link";
-import { serialize } from "next-mdx-remote/serialize";
 
 const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   if (!data) {
@@ -41,8 +42,8 @@ const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
       >
         <ChevronLeft className="w-4 h-4" /> Go back
       </Link>
-      <div className="flex gap-4 my-8">
-        <div className="aspect-video bg-white p-2 shadow-xl">
+      <div className="flex gap-8 my-8">
+        <div className="aspect-video bg-white p-2 shadow-xl basis-2/3">
           <Image
             src={data.image}
             alt={data.title}
@@ -57,7 +58,12 @@ const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
             {data.title}
           </h1>
           <p className="text-lg text-na900 my-4">{data.description}</p>
-          <p className="text-lg text-neutral-700 italic">{`${data.price} zł`}</p>
+          <div className="flex items-center gap-8">
+            <p className="text-lg text-neutral-700 italic shrink-0">{`${data.price} zł`}</p>
+            <AddToCartButton
+              item={{ id: data.id, name: data.title, price: data.price }}
+            />
+          </div>
         </div>
       </div>
       <article className="prose lg:prose-xl">

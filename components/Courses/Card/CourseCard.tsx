@@ -1,6 +1,7 @@
 import Rating from "../Rating";
 import Link from "next/link";
 import Image from "next/image";
+import AddToCartButton from "./AddToCartButton";
 
 const CourseCard = ({
   id,
@@ -28,7 +29,10 @@ const CourseCard = ({
           <Rating rating={rating.rate} />
         </section>
         <h1 className="my-4 text-base text-neutral-900 font-bold">{title}</h1>
-        <p className="text-sm text-neutral-500 italic">{`${price} zł`}</p>
+        <div className="flex justify-between items-center">
+          <p className="text-md text-neutral-500 italic">{`${price} zł`}</p>
+          <AddToCartButton item={{ id, name: title, price }} size="icon" />
+        </div>
       </div>
     </Link>
   </li>

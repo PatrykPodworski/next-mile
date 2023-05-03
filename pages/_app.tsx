@@ -4,7 +4,7 @@ import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import SEO from "../next-seo.config";
-import { CartContextProvider } from "./cart/CartContext";
+import CartContextProvider from "./cart/context/CartContextProvider";
 
 const queryClient = new QueryClient();
 

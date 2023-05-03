@@ -1,12 +1,12 @@
-import { useCartState } from "./CartContext";
+import useCartState from "./context/useCartState";
 
 const CartPage = () => {
-  const cartState = useCartState();
+  const { items } = useCartState();
 
   return (
     <div>
       <h1>Cart Page</h1>
-      <pre>{JSON.stringify(cartState, null, 2)}</pre>
+      <pre>{JSON.stringify(items, null, 2)}</pre>
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import ShoppingBag from "@/components/icons/ShoppingBag";
-import { useCartState } from "@/pages/cart/CartContext";
 import NavigationLink from "./NavigationLink";
+import useCartState from "@/pages/cart/context/useCartState";
 
 const CartLink = () => {
-  const cartState = useCartState();
-  const numberOfItems = cartState.items.reduce((acc, item) => {
+  const { items } = useCartState();
+  const numberOfItems = items.reduce((acc, item) => {
     return acc + item.quantity;
   }, 0);
 
