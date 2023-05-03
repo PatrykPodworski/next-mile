@@ -1,10 +1,10 @@
+import CartContextProvider from "@/components/Cart/context/CartContextProvider";
 import Layout from "@/components/Layout";
 import "@/styles/globals.css";
 import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import SEO from "../next-seo.config";
-import CartContextProvider from "./cart/context/CartContextProvider";
 
 const queryClient = new QueryClient();
 

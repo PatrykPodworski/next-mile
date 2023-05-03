@@ -1,6 +1,6 @@
 import ShoppingBag from "@/components/icons/ShoppingBag";
 import NavigationLink from "./NavigationLink";
-import useCartState from "@/pages/cart/context/useCartState";
+import useCartState from "@/components/Cart/context/useCartState";
 
 const CartLink = () => {
   const { items } = useCartState();

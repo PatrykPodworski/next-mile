@@ -1,6 +1,6 @@
 import PlusIcon from "@/components/icons/PlusIcon";
-import { CartItem } from "@/pages/cart/context/CartContext";
-import useCartState from "@/pages/cart/context/useCartState";
+import { CartItem } from "@/components/Cart/context/CartContext";
+import useCartState from "@/components/Cart/context/useCartState";
 
 const AddToCartButton = ({ item, size }: AddToCartButtonProps) => {
   const { addItem } = useCartState();
