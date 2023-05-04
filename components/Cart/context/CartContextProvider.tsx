@@ -1,11 +1,28 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import CartContext, { CartItem } from "./CartContext";
+import { getCartFromLocalStorage, setCartToLocalStorage } from "./localStorage";
 
 const CartContextProvider = ({ children }: CartContextProviderProps) => {
-  const [items, setItems] = useState<CartItem[]>([]);
+  const [items, setItems] = useState<CartItem[]>();
+
+  useEffect(() => {
+    setItems(getCartFromLocalStorage());
+  }, []);
+
+  useEffect(() => {
+    if (!items) {
+      return;
+    }
+
+    setCartToLocalStorage(items);
+  }, [items]);
 
   const addItem = (item: CartItem) => {
     setItems((state) => {
+      if (!state) {
+        return undefined;
+      }
+
       const itemExists = state.find((x) => x.id === item.id);
       if (itemExists) {
         return state.map((x) =>
@@ -19,6 +36,10 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
 
   const removeItem = (id: CartItem["id"]) => {
     setItems((state) => {
+      if (!state) {
+        return undefined;
+      }
+
       const itemExists = state.find((x) => x.id === id);
       if (!itemExists) {
         return state;
@@ -37,7 +58,7 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
   return (
     <CartContext.Provider
       value={{
-        items,
+        items: items || [],
         addItem,
         removeItem,
       }}
