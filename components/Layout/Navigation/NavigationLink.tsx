@@ -2,18 +2,19 @@ import clsx from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const NavigationLink = ({ href, label }: NavigationLinkProps) => {
+const NavigationLink = ({ href, children, className }: NavigationLinkProps) => {
   const router = useRouter();
 
   return (
     <Link
       className={clsx(
-        "p-4 pb-3",
-        isActiveRoute(router.route, href) && "border-blue-500 border-b-4"
+        "p-4 hover:bg-gray-700 ease-in-out transition-all duration-300",
+        isActiveRoute(router.route, href) && "border-primary border-b-4 pb-3",
+        className
       )}
       href={href}
     >
-      {label}
+      {children}
     </Link>
   );
 };
@@ -30,7 +31,8 @@ const isActiveRoute = (route: string, href: string) => {
 
 type NavigationLinkProps = {
   href: string;
-  label: string;
+  children: React.ReactNode;
+  className?: string;
 };
 
 export default NavigationLink;

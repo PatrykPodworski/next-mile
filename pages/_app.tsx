@@ -1,3 +1,4 @@
+import CartContextProvider from "@/components/Cart/context/CartContextProvider";
 import Layout from "@/components/Layout";
 import "@/styles/globals.css";
 import { DefaultSeo } from "next-seo";
@@ -10,9 +11,11 @@ const queryClient = new QueryClient();
 const App = ({ Component, pageProps }: AppProps) => (
   <QueryClientProvider client={queryClient}>
     <DefaultSeo {...SEO} />
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <CartContextProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </CartContextProvider>
   </QueryClientProvider>
 );
 

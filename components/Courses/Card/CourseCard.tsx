@@ -1,6 +1,7 @@
-import Rating from "../Rating";
 import Link from "next/link";
-import Image from "next/image";
+import CourseImage from "../CourseImage";
+import Rating from "../Rating";
+import AddToCartButton from "./AddToCartButton";
 
 const CourseCard = ({
   id,
@@ -9,26 +10,24 @@ const CourseCard = ({
   category,
   rating,
   price,
+  description,
 }: CourseCardProps) => (
   <li className="shadow-lg bg-neutral-50 overflow-hidden">
     <Link href={`/courses/${id}`}>
-      <div className="aspect-video bg-white p-2">
-        <Image
-          src={image}
-          alt={title}
-          width={16}
-          height={9}
-          className="object-contain h-full w-auto mx-auto"
-          sizes="100vw"
-        />
-      </div>
+      <CourseImage src={image} alt={title} className="p-2" />
       <div className="p-3">
         <section className="flex justify-between items-center">
           <p className="text-sm text-neutral-500">{category}</p>
           <Rating rating={rating.rate} />
         </section>
         <h1 className="my-4 text-base text-neutral-900 font-bold">{title}</h1>
-        <p className="text-sm text-neutral-500 italic">{`${price} zł`}</p>
+        <div className="flex justify-between items-center">
+          <p className="text-md text-neutral-500 italic">{`${price} zł`}</p>
+          <AddToCartButton
+            item={{ id, title, description, image, price }}
+            size="icon"
+          />
+        </div>
       </div>
     </Link>
   </li>
@@ -37,6 +36,7 @@ const CourseCard = ({
 export type CourseCardProps = {
   id: string;
   title: string;
+  description: string;
   image: string;
   category: string;
   rating: { rate: number };
