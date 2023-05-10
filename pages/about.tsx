@@ -15,6 +15,7 @@ const GET_PRODUCTS = gql`
 `;
 
 const About = () => {
+  console.log("url", process.env.NEXT_PUBLIC_GRAPHQL_URL);
   const { loading, error, data } = useQuery(GET_PRODUCTS);
 
   if (loading) {
