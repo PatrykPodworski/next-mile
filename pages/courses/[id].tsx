@@ -1,4 +1,3 @@
-import AddToCartButton from "@/components/Courses/Card/AddToCartButton";
 import CourseImage from "@/components/Courses/CourseImage";
 import Markdown from "@/components/Markdown";
 import ChevronLeft from "@/components/icons/ChevronLeft";
@@ -9,8 +8,6 @@ import {
   GetProductsSlugDocument,
   ProductDetailsFragmentDoc,
 } from "@/graphql/generated/graphql";
-import courseFetcher from "@/services/courses/courseFetcher";
-import courseListFetcher from "@/services/courses/courseListFetcher";
 import {
   GetStaticPaths,
   GetStaticPropsContext,
