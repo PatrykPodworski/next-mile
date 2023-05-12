@@ -11,7 +11,7 @@ const CourseList = ({ courses }: CourseListProps) => (
 );
 
 type CourseListProps = {
-  courses: CourseCardProps[];
+  courses: readonly CourseCardProps[];
 };
 
 export default CourseList;

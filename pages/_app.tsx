@@ -6,12 +6,12 @@ import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import SEO from "../next-seo.config";
 import { ApolloProvider } from "@apollo/client";
-import client from "@/graphql/apolloClient";
+import apolloClient from "@/graphql/apolloClient";
 
 const queryClient = new QueryClient();
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <ApolloProvider client={client}>
+  <ApolloProvider client={apolloClient}>
     <QueryClientProvider client={queryClient}>
       <DefaultSeo {...SEO} />
       <CartContextProvider>
