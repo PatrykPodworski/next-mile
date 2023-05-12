@@ -11,10 +11,7 @@ fragment ProductListItem on Product {
   price
   description
   images(first: 1) {
-    id
-    width
     url
-    height
   }
   categories(first: 1) {
     name

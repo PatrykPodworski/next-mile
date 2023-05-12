@@ -13,7 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "query GetProducts($first: Int!, $skip: Int!) {\n  products(first: $first, skip: $skip) {\n    ...ProductListItem\n  }\n}\n\nfragment ProductListItem on Product {\n  id\n  slug\n  name\n  price\n  description\n  images(first: 1) {\n    id\n    width\n    url\n    height\n  }\n  categories(first: 1) {\n    name\n    id\n  }\n}": types.GetProductsDocument,
+    "query getProduct($slug: String!) {\n  product(where: {slug: $slug}) {\n    ...ProductDetails\n  }\n}\n\nfragment ProductDetails on Product {\n  slug\n  name\n  price\n  description\n  images(first: 1) {\n    url\n  }\n}": types.GetProductDocument,
+    "query GetProducts($first: Int!, $skip: Int!) {\n  products(first: $first, skip: $skip) {\n    ...ProductListItem\n  }\n}\n\nfragment ProductListItem on Product {\n  id\n  slug\n  name\n  price\n  description\n  images(first: 1) {\n    url\n  }\n  categories(first: 1) {\n    name\n    id\n  }\n}": types.GetProductsDocument,
     "query GetProductsSlug {\n  products {\n    slug\n  }\n}": types.GetProductsSlugDocument,
 };
 
@@ -34,7 +35,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query GetProducts($first: Int!, $skip: Int!) {\n  products(first: $first, skip: $skip) {\n    ...ProductListItem\n  }\n}\n\nfragment ProductListItem on Product {\n  id\n  slug\n  name\n  price\n  description\n  images(first: 1) {\n    id\n    width\n    url\n    height\n  }\n  categories(first: 1) {\n    name\n    id\n  }\n}"): (typeof documents)["query GetProducts($first: Int!, $skip: Int!) {\n  products(first: $first, skip: $skip) {\n    ...ProductListItem\n  }\n}\n\nfragment ProductListItem on Product {\n  id\n  slug\n  name\n  price\n  description\n  images(first: 1) {\n    id\n    width\n    url\n    height\n  }\n  categories(first: 1) {\n    name\n    id\n  }\n}"];
+export function graphql(source: "query getProduct($slug: String!) {\n  product(where: {slug: $slug}) {\n    ...ProductDetails\n  }\n}\n\nfragment ProductDetails on Product {\n  slug\n  name\n  price\n  description\n  images(first: 1) {\n    url\n  }\n}"): (typeof documents)["query getProduct($slug: String!) {\n  product(where: {slug: $slug}) {\n    ...ProductDetails\n  }\n}\n\nfragment ProductDetails on Product {\n  slug\n  name\n  price\n  description\n  images(first: 1) {\n    url\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetProducts($first: Int!, $skip: Int!) {\n  products(first: $first, skip: $skip) {\n    ...ProductListItem\n  }\n}\n\nfragment ProductListItem on Product {\n  id\n  slug\n  name\n  price\n  description\n  images(first: 1) {\n    url\n  }\n  categories(first: 1) {\n    name\n    id\n  }\n}"): (typeof documents)["query GetProducts($first: Int!, $skip: Int!) {\n  products(first: $first, skip: $skip) {\n    ...ProductListItem\n  }\n}\n\nfragment ProductListItem on Product {\n  id\n  slug\n  name\n  price\n  description\n  images(first: 1) {\n    url\n  }\n  categories(first: 1) {\n    name\n    id\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

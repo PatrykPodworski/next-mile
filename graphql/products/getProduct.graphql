@@ -1,0 +1,15 @@
+query getProduct($slug: String!) {
+  product(where: { slug: $slug }) {
+    ...ProductDetails
+  }
+}
+
+fragment ProductDetails on Product {
+  slug
+  name
+  price
+  description
+  images(first: 1) {
+    url
+  }
+}

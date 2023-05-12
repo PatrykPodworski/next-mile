@@ -11,9 +11,10 @@ const CourseCard = ({
   categories,
   price,
   description,
+  slug,
 }: CourseCardProps) => (
   <li className="shadow-lg bg-neutral-50 overflow-hidden">
-    <Link href={`/courses/${id}`}>
+    <Link href={`/courses/${slug}`}>
       <CourseImage src={images[0].url} alt={name} className="p-2" />
       <div className="p-3">
         <section className="flex justify-between items-center">

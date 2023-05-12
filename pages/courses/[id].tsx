@@ -2,6 +2,13 @@ import AddToCartButton from "@/components/Courses/Card/AddToCartButton";
 import CourseImage from "@/components/Courses/CourseImage";
 import Markdown from "@/components/Markdown";
 import ChevronLeft from "@/components/icons/ChevronLeft";
+import apolloClient from "@/graphql/apolloClient";
+import { useFragment } from "@/graphql/generated";
+import {
+  GetProductDocument,
+  GetProductsSlugDocument,
+  ProductDetailsFragmentDoc,
+} from "@/graphql/generated/graphql";
 import courseFetcher from "@/services/courses/courseFetcher";
 import courseListFetcher from "@/services/courses/courseListFetcher";
 import {
@@ -11,27 +18,26 @@ import {
 } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import { NextSeo } from "next-seo";
-import Image from "next/image";
 import Link from "next/link";
 
 const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   if (!data) {
-    return <div>Data not available.</div>;
+    return <div>Product not found</div>;
   }
 
   return (
     <>
       <NextSeo
-        title={data.title}
+        title={data.name}
         description={data.description}
-        canonical={`https://next-mile.vercel.app/courses/${data.id}`}
+        canonical={`https://next-mile.vercel.app/courses/${data.slug}`}
         openGraph={{
-          url: `https://next-mile.vercel.app/courses/${data.id}`,
-          title: data.title,
+          url: `https://next-mile.vercel.app/courses/${data.slug}`,
+          title: data.name,
           images: [
             {
-              url: data.image,
-              alt: data.title,
+              url: data.images[0].url,
+              alt: data.name,
               type: "image/jpeg",
             },
           ],
@@ -45,35 +51,36 @@ const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
       </Link>
       <div className="flex gap-8 my-8">
         <CourseImage
-          src={data.image}
-          alt={data.title}
+          src={data.images[0].url}
+          alt={data.name}
           className="p-2 shadow-xl basis-2/3"
         />
         <div>
           <h1 className="text-4xl font-bold mb-4 text-neutral-900">
-            {data.title}
+            {data.name}
           </h1>
-          <p className="text-lg text-na900 my-4">{data.description}</p>
           <div className="flex items-center gap-8">
             <p className="text-lg text-neutral-700 italic shrink-0">{`${data.price} zł`}</p>
-            <AddToCartButton item={data} />
+            {/* <AddToCartButton item={data} /> */}
           </div>
         </div>
       </div>
       <article className="prose lg:prose-xl">
-        <Markdown {...data.longDescription} />
+        <Markdown {...data.mdxDescription} />
       </article>
     </>
   );
 };
 
 export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
-  const data = await courseListFetcher();
+  const { data } = await apolloClient.query({
+    query: GetProductsSlugDocument,
+  });
 
   return {
-    paths: data.slice(0, 8).map((x) => ({
+    paths: data.products.map((x) => ({
       params: {
-        id: x.id,
+        id: x.slug,
       },
     })),
     fallback: "blocking",
@@ -90,10 +97,29 @@ export const getStaticProps = async ({
     };
   }
 
-  const data = await courseFetcher(params.id);
+  const { data } = await apolloClient.query({
+    query: GetProductDocument,
+    variables: {
+      slug: params.id,
+    },
+  });
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const product = useFragment(ProductDetailsFragmentDoc, data.product);
+
+  if (!product) {
+    return {
+      props: {},
+      notFound: true,
+    };
+  }
+
   return {
     props: {
-      data: { ...data, longDescription: await serialize(data.longDescription) },
+      data: {
+        ...product,
+        mdxDescription: await serialize(product.description),
+      },
     },
   };
 };
