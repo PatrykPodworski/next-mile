@@ -1,21 +1,8 @@
-import { gql, useQuery } from "@apollo/client";
-
-const GET_PRODUCTS = gql`
-  query GetProducts {
-    products {
-      id
-      name
-      price
-      description
-      images {
-        url
-      }
-    }
-  }
-`;
+import { GetProductsDocument } from "@/graphql/generated/graphql";
+import { useQuery } from "@apollo/client";
 
 const About = () => {
-  const { loading, error, data } = useQuery(GET_PRODUCTS);
+  const { loading, error, data } = useQuery(GetProductsDocument);
 
   if (loading) {
     return <p>Loading...</p>;
