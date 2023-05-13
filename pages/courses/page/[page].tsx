@@ -14,9 +14,10 @@ import {
 } from "next";
 import { useRouter } from "next/router";
 
-const NUMBER_OF_PAGES = 4000 / 25;
-
-const Courses = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Courses = ({
+  data,
+  numberOfPages,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
   const currentPage =
     typeof router.query.page === "string" ? Number(router.query.page) : 1;
@@ -31,7 +32,7 @@ const Courses = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
       <CourseList courses={products} />
       <LinkPagination
         current={currentPage}
-        pagesCount={NUMBER_OF_PAGES}
+        pagesCount={numberOfPages}
         baseHref="/courses/page"
       />
     </>
@@ -53,6 +54,8 @@ export const getStaticProps = async ({
     },
   });
 
+  const numberOfPages = await getNumberOfPages();
+
   if (error) {
     return {
       notFound: true,
@@ -63,25 +66,31 @@ export const getStaticProps = async ({
     revalidate: false,
     props: {
       data: data.products,
+      numberOfPages: numberOfPages,
     },
   };
 };
 
 export const getStaticPaths: GetStaticPaths<{ page: string }> = async () => {
-  const { data } = await apolloClient.query({
-    query: GetProductsSlugDocument,
-  });
-
-  const numberOfPages = Math.ceil(data.products.length / PRODUCTS_PER_PAGE);
+  const numberOfPages = await getNumberOfPages();
 
   return {
     paths: Array.from(Array(numberOfPages).keys()).map((x) => ({
       params: {
         page: (x + 1).toString(),
+        numberOfPages,
       },
     })),
     fallback: false,
   };
+};
+
+const getNumberOfPages = async () => {
+  const { data } = await apolloClient.query({
+    query: GetProductsSlugDocument,
+  });
+
+  return Math.ceil(data.products.length / PRODUCTS_PER_PAGE);
 };
 
 export default Courses;
