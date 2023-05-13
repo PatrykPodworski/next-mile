@@ -4,16 +4,12 @@ const CartContext = createContext<CartState | null>(null);
 
 export type CartState = {
   items: CartItem[];
-  addItem: (item: CartItem) => void;
+  addItem: (id: CartItem["id"]) => void;
   removeItem: (id: CartItem["id"]) => void;
 };
 
 export type CartItem = {
   id: string;
-  title: string;
-  description: string;
-  image: string;
-  price: number;
   quantity: number;
 };
 

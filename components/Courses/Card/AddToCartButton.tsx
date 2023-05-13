@@ -2,12 +2,12 @@ import PlusIcon from "@/components/icons/PlusIcon";
 import { CartItem } from "@/components/Cart/context/CartContext";
 import useCartState from "@/components/Cart/context/useCartState";
 
-const AddToCartButton = ({ item, size }: AddToCartButtonProps) => {
+const AddToCartButton = ({ id, size }: AddToCartButtonProps) => {
   const { addItem } = useCartState();
 
   const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    addItem({ ...item, quantity: 1 });
+    addItem(id);
   };
 
   if (size === "icon") {
@@ -26,7 +26,7 @@ const AddToCartButton = ({ item, size }: AddToCartButtonProps) => {
 };
 
 type AddToCartButtonProps = {
-  item: Omit<CartItem, "quantity">;
+  id: CartItem["id"];
   size?: "icon" | "standard";
 };
 

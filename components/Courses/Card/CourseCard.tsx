@@ -28,10 +28,7 @@ const CourseCard = ({
         <h1 className="my-4 text-base text-neutral-900 font-bold">{name}</h1>
         <div className="flex justify-between items-center">
           <p className="text-md text-neutral-500 italic">{`${price} zł`}</p>
-          <AddToCartButton
-            item={{ id, title: name, description, image: images[0].url, price }}
-            size="icon"
-          />
+          <AddToCartButton id={id} size="icon" />
         </div>
       </div>
     </Link>
