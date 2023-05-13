@@ -1,9 +1,7 @@
+import { useQuery } from "@apollo/client";
 import CourseListSkeleton from "@/components/Courses/List/CourseListSkeleton";
 import ErrorMessage from "@/components/ErrorMessage";
-import Pagination from "@/components/Pagination";
-import usePagination from "@/components/Pagination/usePagination";
-import CourseList from "../components/Courses/List/CourseList";
-import { useQuery } from "@apollo/client";
+import CourseList from "@/components/Courses/List/CourseList";
 import {
   GetProductsDocument,
   ProductListItemFragmentDoc,
@@ -11,12 +9,10 @@ import {
 import { useFragment } from "@/graphql/generated";
 
 const DealsPage = () => {
-  const { currentPage, ...props } = usePagination(0, 10);
-
   const { data, error, loading } = useQuery(GetProductsDocument, {
     variables: {
       first: PRODUCTS_PER_PAGE,
-      skip: currentPage * PRODUCTS_PER_PAGE,
+      skip: 0,
     },
   });
   const products = useFragment(ProductListItemFragmentDoc, data?.products);
@@ -33,7 +29,6 @@ const DealsPage = () => {
       ) : (
         <CourseList courses={products} />
       )}
-      <Pagination current={currentPage} {...props} />
     </>
   );
 };
