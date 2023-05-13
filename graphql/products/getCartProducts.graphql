@@ -1,0 +1,15 @@
+query getCartProducts($ids: [ID!]!) {
+  products(where: { id_in: $ids }) {
+    ...CartProduct
+  }
+}
+
+fragment CartProduct on Product {
+  id
+  name
+  price
+  description
+  images {
+    url
+  }
+}

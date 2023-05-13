@@ -9,6 +9,10 @@ const LinkPagination = ({
 }: LinkPaginationProps) => {
   const numberOfPages = Math.min(pagesCount, 10);
 
+  if (numberOfPages === 1) {
+    return null;
+  }
+
   return (
     <ul className="btn-group w-full justify-center">
       <LinkPaginationItem

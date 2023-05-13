@@ -2,45 +2,39 @@ import Link from "next/link";
 import CourseImage from "../CourseImage";
 import Rating from "../Rating";
 import AddToCartButton from "./AddToCartButton";
+import { ProductListItemFragment } from "@/graphql/generated/graphql";
 
 const CourseCard = ({
   id,
-  image,
-  title,
-  category,
-  rating,
+  images,
+  name,
+  categories,
   price,
   description,
+  slug,
 }: CourseCardProps) => (
   <li className="shadow-lg bg-neutral-50 overflow-hidden">
-    <Link href={`/courses/${id}`}>
-      <CourseImage src={image} alt={title} className="p-2" />
+    <Link href={`/courses/${slug}`}>
+      <CourseImage src={images[0].url} alt={name} className="p-2" />
       <div className="p-3">
         <section className="flex justify-between items-center">
-          <p className="text-sm text-neutral-500">{category}</p>
-          <Rating rating={rating.rate} />
+          {categories.map((x) => (
+            <p className="text-sm text-neutral-500" key={x.id}>
+              {x.name}
+            </p>
+          ))}
+          <Rating rating={3} />
         </section>
-        <h1 className="my-4 text-base text-neutral-900 font-bold">{title}</h1>
+        <h1 className="my-4 text-base text-neutral-900 font-bold">{name}</h1>
         <div className="flex justify-between items-center">
           <p className="text-md text-neutral-500 italic">{`${price} zł`}</p>
-          <AddToCartButton
-            item={{ id, title, description, image, price }}
-            size="icon"
-          />
+          <AddToCartButton id={id} size="icon" />
         </div>
       </div>
     </Link>
   </li>
 );
 
-export type CourseCardProps = {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  category: string;
-  rating: { rate: number };
-  price: number;
-};
+export type CourseCardProps = ProductListItemFragment;
 
 export default CourseCard;

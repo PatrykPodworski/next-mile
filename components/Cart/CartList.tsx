@@ -1,18 +1,17 @@
-import CartListItem from "./CartListItem";
-import { CartItem } from "./context/CartContext";
+import CartListItem, { CartListItemProps } from "./CartListItem";
 
 const CartList = ({ items }: CartListProps) => {
   return (
     <ul className="flex flex-col gap-4">
       {items.map((x) => (
-        <CartListItem key={x.id} item={x} />
+        <CartListItem key={x.id} {...x} />
       ))}
     </ul>
   );
 };
 
 type CartListProps = {
-  items: CartItem[];
+  items: CartListItemProps[];
 };
 
 export default CartList;

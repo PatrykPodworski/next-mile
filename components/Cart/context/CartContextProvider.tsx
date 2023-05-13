@@ -17,20 +17,20 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
     setCartToLocalStorage(items);
   }, [items]);
 
-  const addItem = (item: CartItem) => {
+  const addItem = (id: CartItem["id"]) => {
     setItems((state) => {
       if (!state) {
         return undefined;
       }
 
-      const itemExists = state.find((x) => x.id === item.id);
+      const itemExists = state.find((x) => x.id === id);
       if (itemExists) {
         return state.map((x) =>
-          x.id === item.id ? { ...x, quantity: x.quantity + 1 } : x
+          x.id === id ? { ...x, quantity: x.quantity + 1 } : x
         );
       }
 
-      return [...state, item];
+      return [...state, { id, quantity: 1 }];
     });
   };
 

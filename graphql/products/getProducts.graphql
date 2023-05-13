@@ -1,0 +1,20 @@
+query GetProducts($first: Int!, $skip: Int!) {
+  products(first: $first, skip: $skip) {
+    ...ProductListItem
+  }
+}
+
+fragment ProductListItem on Product {
+  id
+  slug
+  name
+  price
+  description
+  images(first: 1) {
+    url
+  }
+  categories(first: 1) {
+    name
+    id
+  }
+}

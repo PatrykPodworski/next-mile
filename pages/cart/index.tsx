@@ -1,9 +1,16 @@
 import CartList from "@/components/Cart/CartList";
-import useCartState from "@/components/Cart/context/useCartState";
+import useGetCartItems from "@/components/Cart/useGetCartItems";
 
 const CartPage = () => {
-  const { items } = useCartState();
-  const itemsCount = items.reduce((acc, item) => acc + item.quantity, 0);
+  const { items, loading, error, itemsCount, totalPrice } = useGetCartItems();
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+  if (loading || !items) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div>
@@ -11,6 +18,10 @@ const CartPage = () => {
       <p className="text-xl text-neutral-900 mb-8">
         Items in cart: {itemsCount}
       </p>
+      <p className="text-xl text-neutral-900 mb-8">
+        Total price: {totalPrice} zł
+      </p>
+
       <CartList items={items} />
     </div>
   );
