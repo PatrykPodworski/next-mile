@@ -1,5 +1,5 @@
 import CartList from "@/components/Cart/CartList";
-import useGetCartItems from "./useGetCartItems";
+import useGetCartItems from "@/components/Cart/useGetCartItems";
 
 const CartPage = () => {
   const { items, loading, error, itemsCount, totalPrice } = useGetCartItems();
