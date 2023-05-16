@@ -14,7 +14,7 @@ const CartListItem = ({
   const { addItem, removeItem } = useCartState();
 
   return (
-    <div className="flex items-center gap-8">
+    <div className="flex items-center gap-8 border-neutral-200 border-t py-8">
       <CourseImage
         src={images[0].url}
         alt={name}
@@ -27,16 +27,16 @@ const CartListItem = ({
       </div>
       <div className="btn-group btn-group-horizontal text-neutral-900">
         <button
-          className="btn btn-sm btn-outline hover:btn-primary border-neutral-900"
+          className="btn btn-sm btn-outline hover:btn-primary border-neutral-200"
           onClick={() => removeItem(id)}
         >
           -
         </button>
-        <div className="border-y border-neutral-900 h-8 px-3 flex items-center">
+        <div className="border-y border-neutral-200 h-8 px-3 flex items-center">
           {quantity}
         </div>
         <button
-          className="btn btn-sm btn-outline hover:btn-primary border-neutral-900"
+          className="btn btn-sm btn-outline hover:btn-primary border-neutral-200"
           onClick={() => addItem(id)}
         >
           +

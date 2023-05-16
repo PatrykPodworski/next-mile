@@ -1,4 +1,5 @@
 import CartList from "@/components/Cart/CartList";
+import OrderSummary from "@/components/Cart/OrderSummary";
 import useGetCartItems from "@/components/Cart/useGetCartItems";
 
 const CartPage = () => {
@@ -13,17 +14,17 @@ const CartPage = () => {
   }
 
   return (
-    <div>
-      <h1 className="text-4xl font-bold my-4 text-neutral-900">Your cart</h1>
-      <p className="text-xl text-neutral-900 mb-8">
-        Items in cart: {itemsCount}
-      </p>
-      <p className="text-xl text-neutral-900 mb-8">
-        Total price: {totalPrice} zł
-      </p>
-
-      <CartList items={items} />
-    </div>
+    <>
+      <h1 className="text-4xl font-bold my-8 text-neutral-900">
+        Shopping cart
+      </h1>
+      <div className="flex gap-16 items-start">
+        <div>
+          <CartList items={items} />
+        </div>
+        <OrderSummary totalPrice={totalPrice} />
+      </div>
+    </>
   );
 };
 

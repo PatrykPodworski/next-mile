@@ -11,6 +11,7 @@ module.exports = {
         light: {
           ...require("daisyui/src/colors/themes")["[data-theme=light]"],
           primary: "#00b589",
+          "--btn-text-case": "capitalize",
         },
       },
     ],
