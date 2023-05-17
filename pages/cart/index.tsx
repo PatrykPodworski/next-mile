@@ -3,7 +3,7 @@ import OrderSummary from "@/components/Cart/OrderSummary";
 import useGetCartItems from "@/components/Cart/useGetCartItems";
 
 const CartPage = () => {
-  const { items, loading, error, itemsCount, totalPrice } = useGetCartItems();
+  const { items, loading, error, totalPrice } = useGetCartItems();
 
   if (error) {
     return <p>Error: {error.message}</p>;
