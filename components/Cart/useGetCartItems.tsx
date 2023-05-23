@@ -22,10 +22,6 @@ const useGetCartItems = () => {
     };
   });
 
-  const itemsCount = productsWithQuantity.reduce(
-    (acc, item) => acc + item.quantity,
-    0
-  );
   const totalPrice = productsWithQuantity.reduce(
     (acc, item) => acc + (item.price ?? 0) * item.quantity,
     0
@@ -35,7 +31,6 @@ const useGetCartItems = () => {
     items: productsWithQuantity,
     loading,
     error,
-    itemsCount,
     totalPrice,
   };
 };
