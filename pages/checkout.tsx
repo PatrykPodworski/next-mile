@@ -4,9 +4,10 @@ import { useForm } from "react-hook-form";
 import { object, string, InferType } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TextInput from "@/components/inputs/TextInput";
+import emailSchema from "@/components/ReviewsContainer/emailSchema";
 
 const schema = object().shape({
-  emailAddress: string().email().required(),
+  emailAddress: emailSchema,
   name: string().required().max(128),
   address: string().required().max(256),
   phone: string().required().max(32),

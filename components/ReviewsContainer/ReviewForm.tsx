@@ -1,34 +1,51 @@
-import { CreateProductReviewMutationDocument } from "@/graphql/generated/graphql";
-import { useMutation } from "@apollo/client";
+import clsx from "clsx";
+import TextInput from "../inputs/TextInput";
+import useReviewForm from "./useReviewForm";
 
 const ReviewForm = ({ slug }: ReviewFormProps) => {
-  const [createProductReview, { data, loading, error }] = useMutation(
-    CreateProductReviewMutationDocument,
-    {
-      variables: {
-        review: {
-          name: "Damian",
-          email: "damian@patryk.pl",
-          headline: "Very good long sleeve",
-          content: "Very good long sleeve, I recommend it to everyone!",
-          rating: 5,
-          product: {
-            connect: {
-              slug: slug,
-            },
-          },
-        },
-      },
-    }
-  );
+  const { submit, register, errors, loading } = useReviewForm(slug);
 
   return (
-    <button
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      onClick={() => createProductReview()}
-    >
-      Create review
-    </button>
+    <form className="flex flex-col max-w-md m-auto" onSubmit={submit}>
+      <h1 className="text-xl text-neutral-900">Write a review</h1>
+      <div className="flex gap-4 w-full">
+        <TextInput
+          className="basis-1/2"
+          label={"Name"}
+          error={errors.name}
+          {...register("name")}
+        />
+        <TextInput
+          className="basis-1/2"
+          label={"Email Address"}
+          error={errors.email}
+          {...register("email")}
+        />
+      </div>
+      <TextInput
+        type="number"
+        label={"Rating"}
+        error={errors.rating}
+        {...register("rating")}
+      />
+      <TextInput
+        label={"Headline"}
+        error={errors.headline}
+        {...register("headline")}
+      />
+      <TextInput
+        label={"Content"}
+        error={errors.content}
+        {...register("content")}
+      />
+      <button
+        disabled={loading}
+        className={clsx("btn btn-primary", loading && "btn-disabled")}
+        type="submit"
+      >
+        Add
+      </button>
+    </form>
   );
 };
 
