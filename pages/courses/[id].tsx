@@ -1,5 +1,6 @@
 import CourseImage from "@/components/Courses/CourseImage";
 import Markdown from "@/components/Markdown";
+import ReviewsContainer from "@/components/ReviewsContainer";
 import ChevronLeft from "@/components/icons/ChevronLeft";
 import apolloClient from "@/graphql/apolloClient";
 import { useFragment } from "@/graphql/generated";
@@ -65,6 +66,7 @@ const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
       <article className="prose lg:prose-xl">
         <Markdown {...data.mdxDescription} />
       </article>
+      <ReviewsContainer slug={data.slug} />
     </>
   );
 };
