@@ -6,6 +6,7 @@ query getCartProducts($ids: [ID!]!) {
 
 fragment CartProduct on Product {
   id
+  slug
   name
   price
   description

@@ -1,4 +1,4 @@
-mutation CreateProductReviewMutation($review: ReviewCreateInput!) {
+mutation CreateProductReview($review: ReviewCreateInput!) {
   createReview(data: $review) {
     id
   }
