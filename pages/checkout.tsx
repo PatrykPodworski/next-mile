@@ -1,6 +1,6 @@
 import CartList from "@/components/Cart/CartList";
 import useGetCartItems from "@/components/Cart/useGetCartItems";
-import CheckoutForm from "./CheckoutForm";
+import CheckoutForm from "@/components/CheckoutForm";
 
 const CheckoutPage = () => {
   const { items, loading, error } = useGetCartItems();
