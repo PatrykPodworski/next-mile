@@ -1,4 +1,4 @@
-import { CreateProductReviewMutationDocument } from "@/graphql/generated/graphql";
+import { CreateProductReviewDocument } from "@/graphql/generated/graphql";
 import { useMutation } from "@apollo/client";
 import { object, string, number, InferType } from "yup";
 import { useForm } from "react-hook-form";
@@ -18,7 +18,7 @@ type FormData = InferType<typeof schema>;
 
 const useReviewForm = (slug: string) => {
   const [createProductReview, { loading }] = useMutation(
-    CreateProductReviewMutationDocument
+    CreateProductReviewDocument
   );
 
   const {
@@ -32,8 +32,6 @@ const useReviewForm = (slug: string) => {
       rating: 5,
     },
   });
-
-  console.log("isSubmitSuccessful", isSubmitSuccessful);
 
   useEffect(() => {
     if (isSubmitSuccessful) {
