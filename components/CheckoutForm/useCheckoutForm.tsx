@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { object, string, InferType } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import emailSchema from "@/components/ReviewsContainer/emailSchema";
+import emailSchema from "@/utils/emailSchema";
 import { useMutation } from "@apollo/client";
 import { CreateOrderDocument } from "@/graphql/generated/graphql";
 import useGetCartItems from "@/components/Cart/useGetCartItems";
