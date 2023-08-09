@@ -3,8 +3,8 @@ import { useMutation } from "@apollo/client";
 import { object, string, number, InferType } from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import emailSchema from "./emailSchema";
 import { useEffect, useState } from "react";
+import emailSchema from "@/utils/emailSchema";
 
 const schema = object().shape({
   name: string().max(128).required(),
