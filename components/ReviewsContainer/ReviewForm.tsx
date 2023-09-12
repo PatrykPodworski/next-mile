@@ -6,7 +6,7 @@ const ReviewForm = ({ slug }: ReviewFormProps) => {
   const { submit, register, errors, loading } = useReviewForm(slug);
 
   return (
-    <form className="flex flex-col max-w-md m-auto" onSubmit={submit}>
+    <form className="flex flex-col" onSubmit={submit}>
       <h1 className="text-xl text-neutral-900">Write a review</h1>
       <div className="flex gap-4 w-full">
         <TextInput

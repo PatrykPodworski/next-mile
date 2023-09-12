@@ -19,6 +19,7 @@ const documents = {
     "query GetProducts($first: Int!, $skip: Int!) {\n  products(first: $first, skip: $skip) {\n    ...ProductListItem\n  }\n}\n\nfragment ProductListItem on Product {\n  id\n  slug\n  name\n  price\n  description\n  images(first: 1) {\n    url\n  }\n  categories(first: 1) {\n    name\n    id\n  }\n}": types.GetProductsDocument,
     "query GetProductsSlug {\n  products {\n    slug\n  }\n}": types.GetProductsSlugDocument,
     "mutation CreateProductReview($review: ReviewCreateInput!) {\n  createReview(data: $review) {\n    id\n  }\n}": types.CreateProductReviewDocument,
+    "query GetProductReviews($slug: String!) {\n  reviews(where: {product: {slug: $slug}}) {\n    ...ProductReview\n  }\n}\n\nfragment ProductReview on Review {\n  id\n  name\n  content\n  headline\n  rating\n}": types.GetProductReviewsDocument,
 };
 
 /**
@@ -59,6 +60,10 @@ export function graphql(source: "query GetProductsSlug {\n  products {\n    slug
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation CreateProductReview($review: ReviewCreateInput!) {\n  createReview(data: $review) {\n    id\n  }\n}"): (typeof documents)["mutation CreateProductReview($review: ReviewCreateInput!) {\n  createReview(data: $review) {\n    id\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetProductReviews($slug: String!) {\n  reviews(where: {product: {slug: $slug}}) {\n    ...ProductReview\n  }\n}\n\nfragment ProductReview on Review {\n  id\n  name\n  content\n  headline\n  rating\n}"): (typeof documents)["query GetProductReviews($slug: String!) {\n  reviews(where: {product: {slug: $slug}}) {\n    ...ProductReview\n  }\n}\n\nfragment ProductReview on Review {\n  id\n  name\n  content\n  headline\n  rating\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
