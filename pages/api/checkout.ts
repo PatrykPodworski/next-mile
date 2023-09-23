@@ -1,5 +1,13 @@
+import apolloClient from "@/graphql/apolloClient";
+import {
+  GetCartProductsDocument,
+  GetCartProductsQuery,
+  GetCartProductsQueryVariables,
+  CartProductFragment,
+} from "@/graphql/generated/graphql";
 import { NextApiRequest, NextApiResponse } from "next";
 import Stripe from "stripe";
+import { isRequestBody } from "./RequestBody";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const stripeKey = process.env.STRIPE_SECRET_KEY;
@@ -14,7 +22,36 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
+  if (!isRequestBody(req.body)) {
+    res.status(400).json({ message: "Invalid request body" });
+    return;
+  }
+
   const stripe = new Stripe(stripeKey, { apiVersion: "2023-08-16" });
+
+  const items = req.body.items;
+  const { data, error } = await apolloClient.query<
+    GetCartProductsQuery,
+    GetCartProductsQueryVariables
+  >({
+    query: GetCartProductsDocument,
+    variables: {
+      ids: items.map((x) => x.id),
+    },
+  });
+
+  if (error || !data) {
+    res.status(500).json({ message: "Error fetching products" });
+    return;
+  }
+
+  const products = data.products.filter(isProduct).map((product) => {
+    const item = items.find((x) => x.id === product.id);
+    return {
+      ...product,
+      quantity: item?.quantity ?? 0,
+    };
+  });
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -23,20 +60,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       payment_method_types: ["card", "p24", "paypal"],
       success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/cancel`,
-      line_items: [
-        {
-          quantity: 2,
-          price_data: {
-            currency: "pln",
-            unit_amount: 1234,
-            product_data: {
-              name: "Product name",
-              description: "Product description",
-              images: ["https://thispersondoesnotexist.com"],
-            },
+      line_items: products.map((product) => ({
+        quantity: product.quantity,
+        price_data: {
+          currency: "pln",
+          unit_amount: product.price,
+          product_data: {
+            name: product.name,
+            description: product.description,
+            images: product.images.map((image) => image.url),
           },
         },
-      ],
+      })),
     });
 
     if (!session.url) {
@@ -51,6 +86,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(500).json({ message });
     return;
   }
+};
+
+// Hack to make TypeScript happy
+const isProduct = (product: any): product is CartProductFragment => {
+  return product.__typename === "Product";
 };
 
 export default handler;

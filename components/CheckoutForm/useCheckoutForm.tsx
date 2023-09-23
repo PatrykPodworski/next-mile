@@ -39,12 +39,12 @@ const useCheckoutForm = () => {
 
 const postCheckout = async (
   data: FormData,
-  items: { slug: string; quantity: number }[]
+  items: { id: string; quantity: number }[]
 ) => {
   const body = {
     ...data,
     items: items.map((x) => ({
-      slug: x.slug,
+      id: x.id,
       quantity: x.quantity,
     })),
   };
