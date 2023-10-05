@@ -4,6 +4,9 @@ import {
   GetCartProductsQuery,
   GetCartProductsQueryVariables,
   CartProductFragment,
+  CreateOrderMutation,
+  CreateOrderMutationVariables,
+  CreateOrderDocument,
 } from "@/graphql/generated/graphql";
 import { NextApiRequest, NextApiResponse } from "next";
 import Stripe from "stripe";
@@ -78,6 +81,27 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(500).json({ message: "Missing session" });
       return;
     }
+
+    await apolloClient.mutate<
+      CreateOrderMutation,
+      CreateOrderMutationVariables
+    >({
+      mutation: CreateOrderDocument,
+      variables: {
+        email: req.body.emailAddress,
+        stripeCheckoutId: session.id,
+        total: session.amount_total ?? 0,
+        items: products.map((product) => ({
+          product: {
+            connect: {
+              slug: product.slug,
+            },
+          },
+          quantity: product.quantity,
+          total: product.price * product.quantity,
+        })),
+      },
+    });
 
     res.json({ url: session.url });
     return;
