@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "mutation CompleteOrder($stripeCheckoutId: String!) {\n  updateOrder(\n    where: {stripeCheckoutId: $stripeCheckoutId}\n    data: {orderStatus: Completed}\n  ) {\n    id\n  }\n}": types.CompleteOrderDocument,
     "mutation CreateOrder($email: String!, $total: Int!, $stripeCheckoutId: String!, $items: [OrderItemCreateInput!]) {\n  createOrder(\n    data: {email: $email, total: $total, stripeCheckoutId: $stripeCheckoutId, orderItems: {create: $items}}\n  ) {\n    id\n  }\n}": types.CreateOrderDocument,
     "query getCartProducts($ids: [ID!]!) {\n  products(where: {id_in: $ids}) {\n    ...CartProduct\n  }\n}\n\nfragment CartProduct on Product {\n  id\n  slug\n  name\n  price\n  description\n  images {\n    url\n  }\n}": types.GetCartProductsDocument,
     "query getProduct($slug: String!) {\n  product(where: {slug: $slug}) {\n    ...ProductDetails\n  }\n}\n\nfragment ProductDetails on Product {\n  slug\n  name\n  price\n  description\n  images(first: 1) {\n    url\n  }\n}": types.GetProductDocument,
@@ -36,6 +37,10 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation CompleteOrder($stripeCheckoutId: String!) {\n  updateOrder(\n    where: {stripeCheckoutId: $stripeCheckoutId}\n    data: {orderStatus: Completed}\n  ) {\n    id\n  }\n}"): (typeof documents)["mutation CompleteOrder($stripeCheckoutId: String!) {\n  updateOrder(\n    where: {stripeCheckoutId: $stripeCheckoutId}\n    data: {orderStatus: Completed}\n  ) {\n    id\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

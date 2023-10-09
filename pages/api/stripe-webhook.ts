@@ -1,3 +1,10 @@
+/// <reference types="stripe-event-types" />
+import apolloClient from "@/graphql/apolloClient";
+import {
+  CompleteOrderDocument,
+  CompleteOrderMutation,
+  CompleteOrderMutationVariables,
+} from "@/graphql/generated/graphql";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import getRawBody from "raw-body";
 import Stripe from "stripe";
@@ -16,7 +23,15 @@ const stripeWebhook: NextApiHandler = async (req, res) => {
 
   switch (event.type) {
     case "checkout.session.completed":
-      console.log(event.data);
+      await apolloClient.mutate<
+        CompleteOrderMutation,
+        CompleteOrderMutationVariables
+      >({
+        mutation: CompleteOrderDocument,
+        variables: {
+          stripeCheckoutId: event.data.object.id,
+        },
+      });
       break;
   }
 
@@ -37,7 +52,11 @@ const getStripeEvent = async (req: NextApiRequest, res: NextApiResponse) => {
   const rawBody = await getRawBody(req);
 
   try {
-    return stripe.webhooks.constructEvent(rawBody, sig, secret);
+    return stripe.webhooks.constructEvent(
+      rawBody,
+      sig,
+      secret
+    ) as Stripe.DiscriminatedEvent;
   } catch (err) {
     const message =
       typeof err === "object" &&
