@@ -6,6 +6,7 @@ export type CartState = {
   items: CartItem[];
   addItem: (id: CartItem["id"]) => void;
   removeItem: (id: CartItem["id"]) => void;
+  emptyCart: () => void;
 };
 
 export type CartItem = {

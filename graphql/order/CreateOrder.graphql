@@ -1,5 +1,17 @@
-mutation CreateOrder($data: OrderCreateInput!) {
-  createOrder(data: $data) {
+mutation CreateOrder(
+  $email: String!
+  $total: Int!
+  $stripeCheckoutId: String!
+  $items: [OrderItemCreateInput!]
+) {
+  createOrder(
+    data: {
+      email: $email
+      total: $total
+      stripeCheckoutId: $stripeCheckoutId
+      orderItems: { create: $items }
+    }
+  ) {
     id
   }
 }

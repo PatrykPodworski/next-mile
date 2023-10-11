@@ -12,6 +12,7 @@
   "dependencies": {
     "@apollo/client": "^3.7.14",
     "@hookform/resolvers": "^3.1.0",
+    "@stripe/stripe-js": "^2.1.5",
     "clsx": "^1.2.1",
     "daisyui": "^3.5.1",
     "graphql": "^16.6.0",
@@ -20,11 +21,14 @@
     "next-mdx-remote": "^4.4.1",
     "next-seo": "^6.0.0",
     "qs": "^6.11.1",
+    "raw-body": "^2.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
     "react-query": "^3.39.3",
     "sharp": "^0.32.0",
+    "stripe": "^13.6.0",
+    "stripe-event-types": "^3.0.0",
     "yup": "^1.1.1"
   },
   "devDependencies": {
