@@ -15,9 +15,7 @@ const CartPage = () => {
 
   return (
     <>
-      <h1 className="text-4xl font-bold my-8 text-neutral-900">
-        Shopping cart
-      </h1>
+      <h1 className="text-base my-8 text-neutral-900">Shopping cart</h1>
       <div className="flex gap-16 items-start">
         <div>
           <CartList items={items} />
