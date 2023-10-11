@@ -3,6 +3,7 @@ import { object, string, InferType } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import emailSchema from "@/utils/emailSchema";
 import useGetCartItems from "@/components/Cart/useGetCartItems";
+import useCartState from "../Cart/context/useCartState";
 
 const schema = object().shape({
   emailAddress: emailSchema,
@@ -23,6 +24,7 @@ const useCheckoutForm = () => {
   });
 
   const { items, loading, error } = useGetCartItems();
+  const { emptyCart } = useCartState();
   const disabled = !items || loading || error;
 
   const submit = handleSubmit(async (data) => {
@@ -31,6 +33,8 @@ const useCheckoutForm = () => {
     }
 
     const response = await postCheckout(data, items);
+
+    emptyCart();
     window.location.href = response.url;
   });
 

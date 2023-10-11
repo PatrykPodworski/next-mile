@@ -55,12 +55,17 @@ const CartContextProvider = ({ children }: CartContextProviderProps) => {
     });
   };
 
+  const emptyCart = () => {
+    setItems([]);
+  };
+
   return (
     <CartContext.Provider
       value={{
         items: items || [],
         addItem,
         removeItem,
+        emptyCart,
       }}
     >
       {children}
