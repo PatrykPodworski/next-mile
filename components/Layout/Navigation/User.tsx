@@ -1,14 +1,11 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 
 const User = () => {
-  const { data: session } = useSession();
-
+  const { data } = useSession();
   return (
     <>
-      {session && (
-        <div className="text-base">{`Hello, ${session.user.name}`}</div>
-      )}
-      {session ? (
+      {data && <div className="text-base">{`Hello, ${data.user.name}`}</div>}
+      {data ? (
         <button className="btn btn-primary btn-sm" onClick={() => signOut()}>
           Sign out
         </button>
