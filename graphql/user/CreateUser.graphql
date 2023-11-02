@@ -1,0 +1,17 @@
+mutation CreateUser(
+  $activationCode: String!
+  $email: String!
+  $password: String!
+  $name: String!
+) {
+  createAppUser(
+    data: {
+      name: $name
+      email: $email
+      password: $password
+      activationCode: $activationCode
+    }
+  ) {
+    id
+  }
+}

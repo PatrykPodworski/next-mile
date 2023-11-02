@@ -21,6 +21,7 @@ const documents = {
     "query GetProductsSlug {\n  products {\n    slug\n  }\n}": types.GetProductsSlugDocument,
     "mutation CreateProductReview($review: ReviewCreateInput!) {\n  createReview(data: $review) {\n    id\n  }\n}": types.CreateProductReviewDocument,
     "query GetProductReviews($slug: String!) {\n  reviews(where: {product: {slug: $slug}}) {\n    ...ProductReview\n  }\n}\n\nfragment ProductReview on Review {\n  id\n  name\n  content\n  headline\n  rating\n}": types.GetProductReviewsDocument,
+    "mutation CreateUser($activationCode: String!, $email: String!, $password: String!, $name: String!) {\n  createAppUser(\n    data: {name: $name, email: $email, password: $password, activationCode: $activationCode}\n  ) {\n    id\n  }\n}": types.CreateUserDocument,
     "query GetUserByEmail($email: String!) {\n  appUser(where: {email: $email}) {\n    ...User\n  }\n}\n\nfragment User on AppUser {\n  id\n  name\n  email\n  password\n}": types.GetUserByEmailDocument,
 };
 
@@ -70,6 +71,10 @@ export function graphql(source: "mutation CreateProductReview($review: ReviewCre
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query GetProductReviews($slug: String!) {\n  reviews(where: {product: {slug: $slug}}) {\n    ...ProductReview\n  }\n}\n\nfragment ProductReview on Review {\n  id\n  name\n  content\n  headline\n  rating\n}"): (typeof documents)["query GetProductReviews($slug: String!) {\n  reviews(where: {product: {slug: $slug}}) {\n    ...ProductReview\n  }\n}\n\nfragment ProductReview on Review {\n  id\n  name\n  content\n  headline\n  rating\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation CreateUser($activationCode: String!, $email: String!, $password: String!, $name: String!) {\n  createAppUser(\n    data: {name: $name, email: $email, password: $password, activationCode: $activationCode}\n  ) {\n    id\n  }\n}"): (typeof documents)["mutation CreateUser($activationCode: String!, $email: String!, $password: String!, $name: String!) {\n  createAppUser(\n    data: {name: $name, email: $email, password: $password, activationCode: $activationCode}\n  ) {\n    id\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
