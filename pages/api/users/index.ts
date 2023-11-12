@@ -6,7 +6,6 @@ import {
 } from "@/graphql/generated/graphql";
 import { NextApiRequest, NextApiResponse } from "next";
 import crypto from "crypto";
-import { ApolloError } from "@apollo/client";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "POST") {

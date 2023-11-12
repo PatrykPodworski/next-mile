@@ -1,6 +1,3 @@
-import { GetProductsDocument } from "@/graphql/generated/graphql";
-import { useQuery } from "@apollo/client";
-
 const About = () => {
   return (
     <>

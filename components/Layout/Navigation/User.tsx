@@ -1,4 +1,5 @@
 import { signIn, signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 const User = () => {
   const { data } = useSession();
@@ -10,9 +11,9 @@ const User = () => {
           Sign out
         </button>
       ) : (
-        <button className="btn btn-primary btn-sm" onClick={() => signIn()}>
-          Sign in
-        </button>
+        <Link href="/auth/sign-up" className="btn btn-primary btn-sm">
+          Sign up
+        </Link>
       )}
     </>
   );
