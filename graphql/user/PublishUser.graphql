@@ -1,0 +1,5 @@
+mutation PublishUser($activationCode: String!) {
+  publishAppUser(where: { activationCode: $activationCode }) {
+    id
+  }
+}

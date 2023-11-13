@@ -6,6 +6,7 @@ import {
 } from "@/graphql/generated/graphql";
 import { NextApiRequest, NextApiResponse } from "next";
 import crypto from "crypto";
+import bcrypt from "bcrypt";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "POST") {
@@ -32,7 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       variables: {
         email,
         name,
-        password,
+        password: await bcrypt.hash(password, 12),
         activationCode,
       },
     });

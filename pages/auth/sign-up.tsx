@@ -81,13 +81,13 @@ const SignUpPage = () => {
           </Link>
         </div>
         <p>
-          Already have an account?{" "}
-          <button
-            className="text-blue-500 underline hover:text-blue-700"
+          Already have an account?&nbsp;
+          <span
+            className="text-blue-500 underline hover:text-blue-700 cursor-pointer"
             onClick={() => signIn()}
           >
             Sign in
-          </button>
+          </span>
         </p>
       </div>
     </>
