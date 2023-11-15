@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import emailSchema from "@/utils/emailSchema";
 import useGetCartItems from "@/components/Cart/useGetCartItems";
 import useCartState from "../Cart/context/useCartState";
+import { useSession } from "next-auth/react";
 
 const schema = object().shape({
   emailAddress: emailSchema,
@@ -15,12 +16,17 @@ const schema = object().shape({
 type FormData = InferType<typeof schema>;
 
 const useCheckoutForm = () => {
+  const { data } = useSession();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
+    defaultValues: data?.user && {
+      name: data.user.name,
+      emailAddress: data.user.email,
+    },
   });
 
   const { items, loading, error } = useGetCartItems();
