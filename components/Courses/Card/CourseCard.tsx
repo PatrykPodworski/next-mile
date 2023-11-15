@@ -10,7 +10,6 @@ const CourseCard = ({
   name,
   categories,
   price,
-  description,
   slug,
 }: CourseCardProps) => (
   <li className="shadow-lg bg-neutral-50 overflow-hidden">
@@ -27,7 +26,9 @@ const CourseCard = ({
         </section>
         <h1 className="my-4 text-base text-neutral-900 font-bold">{name}</h1>
         <div className="flex justify-between items-center">
-          <p className="text-md text-neutral-500 italic">{`${price} zł`}</p>
+          <p className="text-md text-neutral-500 italic">{`${
+            price / 100
+          } zł`}</p>
           <AddToCartButton id={id} size="icon" />
         </div>
       </div>

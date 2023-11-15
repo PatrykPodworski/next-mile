@@ -12,7 +12,7 @@ const OrderSummary = ({ totalPrice }: OrderSummaryProps) => {
       <div className="flex justify-between">
         <p className="text-sm text-neutral-700">Total price</p>
         <p className="text-sm text-neutral-900 font-semibold">
-          {totalPrice} zł
+          {totalPrice / 100} zł
         </p>
       </div>
       <Link
