@@ -15,3 +15,23 @@ mutation CreateOrder(
     id
   }
 }
+
+mutation CreateOrderWithUser(
+  $email: String!
+  $total: Int!
+  $stripeCheckoutId: String!
+  $items: [OrderItemCreateInput!]
+  $userId: ID!
+) {
+  createOrder(
+    data: {
+      email: $email
+      total: $total
+      stripeCheckoutId: $stripeCheckoutId
+      orderItems: { create: $items }
+      user: { connect: { id: $userId } }
+    }
+  ) {
+    id
+  }
+}

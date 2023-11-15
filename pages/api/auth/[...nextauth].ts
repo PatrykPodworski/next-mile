@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import {
@@ -9,7 +9,7 @@ import {
 } from "@/graphql/generated/graphql";
 import apolloClient from "@/graphql/apolloClient";
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -51,7 +51,25 @@ export default NextAuth({
       },
     }),
   ],
-});
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.id as string;
+      }
+
+      return session;
+    },
+  },
+};
+
+export default NextAuth(authOptions);
 
 const isUser = (x: any): x is UserFragment => {
   return x?.__typename === "AppUser";
