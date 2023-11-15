@@ -58,7 +58,9 @@ const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
             {data.name}
           </h1>
           <div className="flex items-center gap-8">
-            <p className="text-lg text-neutral-700 italic shrink-0">{`${data.price} zł`}</p>
+            <p className="text-lg text-neutral-700 italic shrink-0">{`${
+              data.price / 100
+            } zł`}</p>
             {/* <AddToCartButton item={data} /> */}
           </div>
         </div>
