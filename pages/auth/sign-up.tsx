@@ -1,7 +1,7 @@
 import TextInput from "@/components/inputs/TextInput";
 import emailSchema from "@/utils/emailSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -47,7 +47,19 @@ const useSignUpForm = () => {
 };
 
 const SignUpPage = () => {
+  const session = useSession();
+  const router = useRouter();
   const { register, errors, submit } = useSignUpForm();
+
+  if (session.status === "loading") {
+    return null;
+  }
+
+  if (session.status === "authenticated") {
+    router.push("/");
+    return null;
+  }
+
   return (
     <>
       <div className="flex flex-col items-stretch max-w-xs mx-auto">
