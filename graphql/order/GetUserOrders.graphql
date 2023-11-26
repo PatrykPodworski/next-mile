@@ -1,0 +1,21 @@
+query GetUserOrders($id: ID!) {
+  orders(where: { user: { id: $id } }) {
+    ...UserOrder
+  }
+}
+
+fragment UserOrder on Order {
+  id
+  total
+  orderStatus
+  createdAt
+  orderItems {
+    quantity
+    product {
+      name
+      images {
+        url
+      }
+    }
+  }
+}

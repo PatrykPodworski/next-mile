@@ -32,8 +32,593 @@ export type Aggregate = {
   count: Scalars['Int'];
 };
 
+export type AppUser = Entity & Node & {
+  __typename?: 'AppUser';
+  activationCode: Scalars['String'];
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<AppUser>;
+  email: Scalars['String'];
+  /** List of AppUser versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  /** Orders made by the user */
+  orders: Array<Order>;
+  password: Scalars['String'];
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  /** System stage field */
+  stage: Stage;
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type AppUserCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type AppUserDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+  stages?: Array<Stage>;
+};
+
+
+export type AppUserHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type AppUserOrdersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<OrderOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<OrderWhereInput>;
+};
+
+
+export type AppUserPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type AppUserScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type AppUserUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type AppUserConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: AppUserWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type AppUserConnection = {
+  __typename?: 'AppUserConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<AppUserEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type AppUserCreateInput = {
+  activationCode: Scalars['String'];
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email: Scalars['String'];
+  name: Scalars['String'];
+  orders?: InputMaybe<OrderCreateManyInlineInput>;
+  password: Scalars['String'];
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type AppUserCreateManyInlineInput = {
+  /** Connect multiple existing AppUser documents */
+  connect?: InputMaybe<Array<AppUserWhereUniqueInput>>;
+  /** Create and connect multiple existing AppUser documents */
+  create?: InputMaybe<Array<AppUserCreateInput>>;
+};
+
+export type AppUserCreateOneInlineInput = {
+  /** Connect one existing AppUser document */
+  connect?: InputMaybe<AppUserWhereUniqueInput>;
+  /** Create and connect one AppUser document */
+  create?: InputMaybe<AppUserCreateInput>;
+};
+
+/** An edge in a connection. */
+export type AppUserEdge = {
+  __typename?: 'AppUserEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: AppUser;
+};
+
+/** Identifies documents */
+export type AppUserManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<AppUserWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<AppUserWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<AppUserWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  activationCode?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  activationCode_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  activationCode_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  activationCode_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  activationCode_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  activationCode_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  activationCode_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  activationCode_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  activationCode_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  activationCode_starts_with?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<AppUserWhereStageInput>;
+  documentInStages_none?: InputMaybe<AppUserWhereStageInput>;
+  documentInStages_some?: InputMaybe<AppUserWhereStageInput>;
+  email?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  email_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  email_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  email_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  email_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  email_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  email_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  email_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  email_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  email_starts_with?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  name_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  name_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  name_starts_with?: InputMaybe<Scalars['String']>;
+  orders_every?: InputMaybe<OrderWhereInput>;
+  orders_none?: InputMaybe<OrderWhereInput>;
+  orders_some?: InputMaybe<OrderWhereInput>;
+  password?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  password_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  password_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  password_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  password_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  password_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  password_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  password_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  password_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  password_starts_with?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum AppUserOrderByInput {
+  ActivationCodeAsc = 'activationCode_ASC',
+  ActivationCodeDesc = 'activationCode_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  EmailAsc = 'email_ASC',
+  EmailDesc = 'email_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  PasswordAsc = 'password_ASC',
+  PasswordDesc = 'password_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type AppUserUpdateInput = {
+  activationCode?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  orders?: InputMaybe<OrderUpdateManyInlineInput>;
+  password?: InputMaybe<Scalars['String']>;
+};
+
+export type AppUserUpdateManyInlineInput = {
+  /** Connect multiple existing AppUser documents */
+  connect?: InputMaybe<Array<AppUserConnectInput>>;
+  /** Create and connect multiple AppUser documents */
+  create?: InputMaybe<Array<AppUserCreateInput>>;
+  /** Delete multiple AppUser documents */
+  delete?: InputMaybe<Array<AppUserWhereUniqueInput>>;
+  /** Disconnect multiple AppUser documents */
+  disconnect?: InputMaybe<Array<AppUserWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing AppUser documents */
+  set?: InputMaybe<Array<AppUserWhereUniqueInput>>;
+  /** Update multiple AppUser documents */
+  update?: InputMaybe<Array<AppUserUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple AppUser documents */
+  upsert?: InputMaybe<Array<AppUserUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type AppUserUpdateManyInput = {
+  name?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+};
+
+export type AppUserUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: AppUserUpdateManyInput;
+  /** Document search */
+  where: AppUserWhereInput;
+};
+
+export type AppUserUpdateOneInlineInput = {
+  /** Connect existing AppUser document */
+  connect?: InputMaybe<AppUserWhereUniqueInput>;
+  /** Create and connect one AppUser document */
+  create?: InputMaybe<AppUserCreateInput>;
+  /** Delete currently connected AppUser document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected AppUser document */
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single AppUser document */
+  update?: InputMaybe<AppUserUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single AppUser document */
+  upsert?: InputMaybe<AppUserUpsertWithNestedWhereUniqueInput>;
+};
+
+export type AppUserUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: AppUserUpdateInput;
+  /** Unique document search */
+  where: AppUserWhereUniqueInput;
+};
+
+export type AppUserUpsertInput = {
+  /** Create document if it didn't exist */
+  create: AppUserCreateInput;
+  /** Update document if it exists */
+  update: AppUserUpdateInput;
+};
+
+export type AppUserUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: AppUserUpsertInput;
+  /** Unique document search */
+  where: AppUserWhereUniqueInput;
+};
+
+/** This contains a set of filters that can be used to compare values internally */
+export type AppUserWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Identifies documents */
+export type AppUserWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<AppUserWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<AppUserWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<AppUserWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  activationCode?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  activationCode_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  activationCode_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  activationCode_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  activationCode_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  activationCode_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  activationCode_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  activationCode_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  activationCode_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  activationCode_starts_with?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<AppUserWhereStageInput>;
+  documentInStages_none?: InputMaybe<AppUserWhereStageInput>;
+  documentInStages_some?: InputMaybe<AppUserWhereStageInput>;
+  email?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  email_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  email_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  email_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  email_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  email_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  email_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  email_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  email_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  email_starts_with?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  name_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  name_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  name_starts_with?: InputMaybe<Scalars['String']>;
+  orders_every?: InputMaybe<OrderWhereInput>;
+  orders_none?: InputMaybe<OrderWhereInput>;
+  orders_some?: InputMaybe<OrderWhereInput>;
+  password?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  password_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  password_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  password_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  password_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  password_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  password_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  password_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  password_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  password_starts_with?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** Any other value that exists and is not equal to the given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type AppUserWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<AppUserWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<AppUserWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<AppUserWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: InputMaybe<AppUserWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  stage?: InputMaybe<Stage>;
+};
+
+/** References AppUser record uniquely */
+export type AppUserWhereUniqueInput = {
+  activationCode?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+};
+
 /** Asset system model */
-export type Asset = Node & {
+export type Asset = Entity & Node & {
   __typename?: 'Asset';
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
@@ -719,7 +1304,7 @@ export type BatchPayload = {
 };
 
 /** Category of products, e.g. Menswear. */
-export type Category = Node & {
+export type Category = Entity & Node & {
   __typename?: 'Category';
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
@@ -1310,7 +1895,7 @@ export type CategoryWhereUniqueInput = {
 };
 
 /** Collection of products, e.g. Winter Sale. */
-export type Collection = Node & {
+export type Collection = Entity & Node & {
   __typename?: 'Collection';
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
@@ -1925,7 +2510,7 @@ export type ConnectPositionInput = {
   start?: InputMaybe<Scalars['Boolean']>;
 };
 
-export type Currency = Node & {
+export type Currency = Entity & Node & {
   __typename?: 'Currency';
   code: Scalars['String'];
   /** The time the document was created */
@@ -2467,6 +3052,48 @@ export type DocumentVersion = {
   stage: Stage;
 };
 
+/** An object with an ID */
+export type Entity = {
+  /** The id of the object. */
+  id: Scalars['ID'];
+  /** The Stage of an object */
+  stage: Stage;
+};
+
+/** This enumeration holds all typenames that implement the Entity interface. Components and models implement the Entity interface. */
+export enum EntityTypeName {
+  AppUser = 'AppUser',
+  /** Asset system model */
+  Asset = 'Asset',
+  /** Category of products, e.g. Menswear. */
+  Category = 'Category',
+  /** Collection of products, e.g. Winter Sale. */
+  Collection = 'Collection',
+  Currency = 'Currency',
+  Order = 'Order',
+  OrderItem = 'OrderItem',
+  Product = 'Product',
+  ProductColorVariant = 'ProductColorVariant',
+  ProductSizeColorVariant = 'ProductSizeColorVariant',
+  ProductSizeVariant = 'ProductSizeVariant',
+  Review = 'Review',
+  /** Scheduled Operation system model */
+  ScheduledOperation = 'ScheduledOperation',
+  /** Scheduled Release system model */
+  ScheduledRelease = 'ScheduledRelease',
+  /** User system model */
+  User = 'User'
+}
+
+/** Allows to specify input to query models and components directly */
+export type EntityWhereInput = {
+  /** The ID of an object */
+  id: Scalars['ID'];
+  stage: Stage;
+  /** The Type name of an object */
+  typename: EntityTypeName;
+};
+
 export enum ImageFit {
   /** Resizes the image to fit within the specified parameters without distorting, cropping, or changing the aspect ratio. */
   Clip = 'clip',
@@ -2522,6 +3149,8 @@ export type LocationInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Create one appUser */
+  createAppUser?: Maybe<AppUser>;
   /**
    * Create one asset
    * @deprecated Asset mutations will be overhauled soon
@@ -2549,6 +3178,8 @@ export type Mutation = {
   createReview?: Maybe<Review>;
   /** Create one scheduledRelease */
   createScheduledRelease?: Maybe<ScheduledRelease>;
+  /** Delete one appUser from _all_ existing stages. Returns deleted document. */
+  deleteAppUser?: Maybe<AppUser>;
   /** Delete one asset from _all_ existing stages. Returns deleted document. */
   deleteAsset?: Maybe<Asset>;
   /** Delete one category from _all_ existing stages. Returns deleted document. */
@@ -2557,6 +3188,13 @@ export type Mutation = {
   deleteCollection?: Maybe<Collection>;
   /** Delete one currency from _all_ existing stages. Returns deleted document. */
   deleteCurrency?: Maybe<Currency>;
+  /**
+   * Delete many AppUser documents
+   * @deprecated Please use the new paginated many mutation (deleteManyAppUsersConnection)
+   */
+  deleteManyAppUsers: BatchPayload;
+  /** Delete many AppUser documents, return deleted documents */
+  deleteManyAppUsersConnection: AppUserConnection;
   /**
    * Delete many Asset documents
    * @deprecated Please use the new paginated many mutation (deleteManyAssetsConnection)
@@ -2652,6 +3290,8 @@ export type Mutation = {
   deleteScheduledOperation?: Maybe<ScheduledOperation>;
   /** Delete one scheduledRelease from _all_ existing stages. Returns deleted document. */
   deleteScheduledRelease?: Maybe<ScheduledRelease>;
+  /** Publish one appUser */
+  publishAppUser?: Maybe<AppUser>;
   /** Publish one asset */
   publishAsset?: Maybe<Asset>;
   /** Publish one category */
@@ -2660,6 +3300,13 @@ export type Mutation = {
   publishCollection?: Maybe<Collection>;
   /** Publish one currency */
   publishCurrency?: Maybe<Currency>;
+  /**
+   * Publish many AppUser documents
+   * @deprecated Please use the new paginated many mutation (publishManyAppUsersConnection)
+   */
+  publishManyAppUsers: BatchPayload;
+  /** Publish many AppUser documents */
+  publishManyAppUsersConnection: AppUserConnection;
   /**
    * Publish many Asset documents
    * @deprecated Please use the new paginated many mutation (publishManyAssetsConnection)
@@ -2751,6 +3398,8 @@ export type Mutation = {
   publishProductSizeVariant?: Maybe<ProductSizeVariant>;
   /** Publish one review */
   publishReview?: Maybe<Review>;
+  /** Schedule to publish one appUser */
+  schedulePublishAppUser?: Maybe<AppUser>;
   /** Schedule to publish one asset */
   schedulePublishAsset?: Maybe<Asset>;
   /** Schedule to publish one category */
@@ -2773,6 +3422,8 @@ export type Mutation = {
   schedulePublishProductSizeVariant?: Maybe<ProductSizeVariant>;
   /** Schedule to publish one review */
   schedulePublishReview?: Maybe<Review>;
+  /** Unpublish one appUser from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishAppUser?: Maybe<AppUser>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishAsset?: Maybe<Asset>;
   /** Unpublish one category from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -2795,6 +3446,8 @@ export type Mutation = {
   scheduleUnpublishProductSizeVariant?: Maybe<ProductSizeVariant>;
   /** Unpublish one review from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishReview?: Maybe<Review>;
+  /** Unpublish one appUser from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishAppUser?: Maybe<AppUser>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishAsset?: Maybe<Asset>;
   /** Unpublish one category from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -2803,6 +3456,13 @@ export type Mutation = {
   unpublishCollection?: Maybe<Collection>;
   /** Unpublish one currency from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishCurrency?: Maybe<Currency>;
+  /**
+   * Unpublish many AppUser documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyAppUsersConnection)
+   */
+  unpublishManyAppUsers: BatchPayload;
+  /** Find many AppUser documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyAppUsersConnection: AppUserConnection;
   /**
    * Unpublish many Asset documents
    * @deprecated Please use the new paginated many mutation (unpublishManyAssetsConnection)
@@ -2894,6 +3554,8 @@ export type Mutation = {
   unpublishProductSizeVariant?: Maybe<ProductSizeVariant>;
   /** Unpublish one review from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishReview?: Maybe<Review>;
+  /** Update one appUser */
+  updateAppUser?: Maybe<AppUser>;
   /** Update one asset */
   updateAsset?: Maybe<Asset>;
   /** Update one category */
@@ -2902,6 +3564,13 @@ export type Mutation = {
   updateCollection?: Maybe<Collection>;
   /** Update one currency */
   updateCurrency?: Maybe<Currency>;
+  /**
+   * Update many appUsers
+   * @deprecated Please use the new paginated many mutation (updateManyAppUsersConnection)
+   */
+  updateManyAppUsers: BatchPayload;
+  /** Update many AppUser documents */
+  updateManyAppUsersConnection: AppUserConnection;
   /**
    * Update many assets
    * @deprecated Please use the new paginated many mutation (updateManyAssetsConnection)
@@ -2995,6 +3664,8 @@ export type Mutation = {
   updateReview?: Maybe<Review>;
   /** Update one scheduledRelease */
   updateScheduledRelease?: Maybe<ScheduledRelease>;
+  /** Upsert one appUser */
+  upsertAppUser?: Maybe<AppUser>;
   /** Upsert one asset */
   upsertAsset?: Maybe<Asset>;
   /** Upsert one category */
@@ -3017,6 +3688,11 @@ export type Mutation = {
   upsertProductSizeVariant?: Maybe<ProductSizeVariant>;
   /** Upsert one review */
   upsertReview?: Maybe<Review>;
+};
+
+
+export type MutationCreateAppUserArgs = {
+  data: AppUserCreateInput;
 };
 
 
@@ -3080,6 +3756,11 @@ export type MutationCreateScheduledReleaseArgs = {
 };
 
 
+export type MutationDeleteAppUserArgs = {
+  where: AppUserWhereUniqueInput;
+};
+
+
 export type MutationDeleteAssetArgs = {
   where: AssetWhereUniqueInput;
 };
@@ -3097,6 +3778,21 @@ export type MutationDeleteCollectionArgs = {
 
 export type MutationDeleteCurrencyArgs = {
   where: CurrencyWhereUniqueInput;
+};
+
+
+export type MutationDeleteManyAppUsersArgs = {
+  where?: InputMaybe<AppUserManyWhereInput>;
+};
+
+
+export type MutationDeleteManyAppUsersConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<AppUserManyWhereInput>;
 };
 
 
@@ -3310,6 +4006,12 @@ export type MutationDeleteScheduledReleaseArgs = {
 };
 
 
+export type MutationPublishAppUserArgs = {
+  to?: Array<Stage>;
+  where: AppUserWhereUniqueInput;
+};
+
+
 export type MutationPublishAssetArgs = {
   locales?: InputMaybe<Array<Locale>>;
   publishBase?: InputMaybe<Scalars['Boolean']>;
@@ -3340,6 +4042,24 @@ export type MutationPublishCollectionArgs = {
 export type MutationPublishCurrencyArgs = {
   to?: Array<Stage>;
   where: CurrencyWhereUniqueInput;
+};
+
+
+export type MutationPublishManyAppUsersArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<AppUserManyWhereInput>;
+};
+
+
+export type MutationPublishManyAppUsersConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<AppUserManyWhereInput>;
 };
 
 
@@ -3637,6 +4357,14 @@ export type MutationPublishReviewArgs = {
 };
 
 
+export type MutationSchedulePublishAppUserArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  to?: Array<Stage>;
+  where: AppUserWhereUniqueInput;
+};
+
+
 export type MutationSchedulePublishAssetArgs = {
   locales?: InputMaybe<Array<Locale>>;
   publishBase?: InputMaybe<Scalars['Boolean']>;
@@ -3746,6 +4474,14 @@ export type MutationSchedulePublishReviewArgs = {
 };
 
 
+export type MutationScheduleUnpublishAppUserArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  where: AppUserWhereUniqueInput;
+};
+
+
 export type MutationScheduleUnpublishAssetArgs = {
   from?: Array<Stage>;
   locales?: InputMaybe<Array<Locale>>;
@@ -3848,6 +4584,12 @@ export type MutationScheduleUnpublishReviewArgs = {
 };
 
 
+export type MutationUnpublishAppUserArgs = {
+  from?: Array<Stage>;
+  where: AppUserWhereUniqueInput;
+};
+
+
 export type MutationUnpublishAssetArgs = {
   from?: Array<Stage>;
   locales?: InputMaybe<Array<Locale>>;
@@ -3875,6 +4617,24 @@ export type MutationUnpublishCollectionArgs = {
 export type MutationUnpublishCurrencyArgs = {
   from?: Array<Stage>;
   where: CurrencyWhereUniqueInput;
+};
+
+
+export type MutationUnpublishManyAppUsersArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<AppUserManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyAppUsersConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<AppUserManyWhereInput>;
 };
 
 
@@ -4154,6 +4914,12 @@ export type MutationUnpublishReviewArgs = {
 };
 
 
+export type MutationUpdateAppUserArgs = {
+  data: AppUserUpdateInput;
+  where: AppUserWhereUniqueInput;
+};
+
+
 export type MutationUpdateAssetArgs = {
   data: AssetUpdateInput;
   where: AssetWhereUniqueInput;
@@ -4175,6 +4941,23 @@ export type MutationUpdateCollectionArgs = {
 export type MutationUpdateCurrencyArgs = {
   data: CurrencyUpdateInput;
   where: CurrencyWhereUniqueInput;
+};
+
+
+export type MutationUpdateManyAppUsersArgs = {
+  data: AppUserUpdateManyInput;
+  where?: InputMaybe<AppUserManyWhereInput>;
+};
+
+
+export type MutationUpdateManyAppUsersConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  data: AppUserUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<AppUserManyWhereInput>;
 };
 
 
@@ -4413,6 +5196,12 @@ export type MutationUpdateScheduledReleaseArgs = {
 };
 
 
+export type MutationUpsertAppUserArgs = {
+  upsert: AppUserUpsertInput;
+  where: AppUserWhereUniqueInput;
+};
+
+
 export type MutationUpsertAssetArgs = {
   upsert: AssetUpsertInput;
   where: AssetWhereUniqueInput;
@@ -4486,7 +5275,7 @@ export type Node = {
   stage: Stage;
 };
 
-export type Order = Node & {
+export type Order = Entity & Node & {
   __typename?: 'Order';
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
@@ -4514,6 +5303,8 @@ export type Order = Node & {
   updatedAt: Scalars['DateTime'];
   /** User that last updated this document */
   updatedBy?: Maybe<User>;
+  /** The user who made the order */
+  user?: Maybe<AppUser>;
 };
 
 
@@ -4573,6 +5364,12 @@ export type OrderUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
+
+export type OrderUserArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
 export type OrderConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
   position?: InputMaybe<ConnectPositionInput>;
@@ -4598,6 +5395,7 @@ export type OrderCreateInput = {
   stripeCheckoutId: Scalars['String'];
   total: Scalars['Int'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
+  user?: InputMaybe<AppUserCreateOneInlineInput>;
 };
 
 export type OrderCreateManyInlineInput = {
@@ -4623,7 +5421,7 @@ export type OrderEdge = {
   node: Order;
 };
 
-export type OrderItem = Node & {
+export type OrderItem = Entity & Node & {
   __typename?: 'OrderItem';
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
@@ -5249,6 +6047,7 @@ export type OrderManyWhereInput = {
   /** All values that are not contained in given list. */
   updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
   updatedBy?: InputMaybe<UserWhereInput>;
+  user?: InputMaybe<AppUserWhereInput>;
 };
 
 export enum OrderOrderByInput {
@@ -5281,6 +6080,7 @@ export type OrderUpdateInput = {
   orderStatus?: InputMaybe<OrderStatus>;
   stripeCheckoutId?: InputMaybe<Scalars['String']>;
   total?: InputMaybe<Scalars['Int']>;
+  user?: InputMaybe<AppUserUpdateOneInlineInput>;
 };
 
 export type OrderUpdateManyInlineInput = {
@@ -5501,6 +6301,7 @@ export type OrderWhereInput = {
   /** All values that are not contained in given list. */
   updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
   updatedBy?: InputMaybe<UserWhereInput>;
+  user?: InputMaybe<AppUserWhereInput>;
 };
 
 /** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
@@ -5538,7 +6339,7 @@ export type PageInfo = {
   startCursor?: Maybe<Scalars['String']>;
 };
 
-export type Product = Node & {
+export type Product = Entity & Node & {
   __typename?: 'Product';
   categories: Array<Category>;
   collections: Array<Collection>;
@@ -5724,7 +6525,7 @@ export enum ProductColor {
   Purple = 'PURPLE'
 }
 
-export type ProductColorVariant = Node & {
+export type ProductColorVariant = Entity & Node & {
   __typename?: 'ProductColorVariant';
   color: ProductColor;
   /** The time the document was created */
@@ -6485,7 +7286,7 @@ export enum ProductSize {
   Xs = 'XS'
 }
 
-export type ProductSizeColorVariant = Node & {
+export type ProductSizeColorVariant = Entity & Node & {
   __typename?: 'ProductSizeColorVariant';
   color: ProductColor;
   /** The time the document was created */
@@ -7037,7 +7838,7 @@ export type ProductSizeColorVariantWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']>;
 };
 
-export type ProductSizeVariant = Node & {
+export type ProductSizeVariant = Entity & Node & {
   __typename?: 'ProductSizeVariant';
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
@@ -8005,6 +8806,14 @@ export type PublishLocaleInput = {
 
 export type Query = {
   __typename?: 'Query';
+  /** Retrieve a single appUser */
+  appUser?: Maybe<AppUser>;
+  /** Retrieve document version */
+  appUserVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple appUsers */
+  appUsers: Array<AppUser>;
+  /** Retrieve multiple appUsers using the Relay connection interface */
+  appUsersConnection: AppUserConnection;
   /** Retrieve a single asset */
   asset?: Maybe<Asset>;
   /** Retrieve document version */
@@ -8037,6 +8846,8 @@ export type Query = {
   currency?: Maybe<Currency>;
   /** Retrieve document version */
   currencyVersion?: Maybe<DocumentVersion>;
+  /** Fetches an object given its ID */
+  entities?: Maybe<Array<Entity>>;
   /** Fetches an object given its ID */
   node?: Maybe<Node>;
   /** Retrieve a single order */
@@ -8113,6 +8924,44 @@ export type Query = {
   users: Array<User>;
   /** Retrieve multiple users using the Relay connection interface */
   usersConnection: UserConnection;
+};
+
+
+export type QueryAppUserArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: AppUserWhereUniqueInput;
+};
+
+
+export type QueryAppUserVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryAppUsersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<AppUserOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<AppUserWhereInput>;
+};
+
+
+export type QueryAppUsersConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<AppUserOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<AppUserWhereInput>;
 };
 
 
@@ -8265,6 +9114,11 @@ export type QueryCurrencyArgs = {
 
 export type QueryCurrencyVersionArgs = {
   where: VersionWhereInput;
+};
+
+
+export type QueryEntitiesArgs = {
+  where: Array<EntityWhereInput>;
 };
 
 
@@ -8656,7 +9510,7 @@ export type RgbaInput = {
   r: Scalars['RGBAHue'];
 };
 
-export type Review = Node & {
+export type Review = Entity & Node & {
   __typename?: 'Review';
   content: Scalars['String'];
   /** The time the document was created */
@@ -9279,7 +10133,7 @@ export type RichText = {
 };
 
 /** Scheduled Operation system model */
-export type ScheduledOperation = Node & {
+export type ScheduledOperation = Entity & Node & {
   __typename?: 'ScheduledOperation';
   affectedDocuments: Array<ScheduledOperationAffectedDocument>;
   /** The time the document was created */
@@ -9360,7 +10214,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Asset | Category | Collection | Currency | Order | OrderItem | Product | ProductColorVariant | ProductSizeColorVariant | ProductSizeVariant | Review;
+export type ScheduledOperationAffectedDocument = AppUser | Asset | Category | Collection | Currency | Order | OrderItem | Product | ProductColorVariant | ProductSizeColorVariant | ProductSizeVariant | Review;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -9714,7 +10568,7 @@ export type ScheduledOperationWhereUniqueInput = {
 };
 
 /** Scheduled Release system model */
-export type ScheduledRelease = Node & {
+export type ScheduledRelease = Entity & Node & {
   __typename?: 'ScheduledRelease';
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
@@ -10315,7 +11169,7 @@ export type UnpublishLocaleInput = {
 };
 
 /** User system model */
-export type User = Node & {
+export type User = Entity & Node & {
   __typename?: 'User';
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
@@ -10822,6 +11676,29 @@ export type CreateOrderMutationVariables = Exact<{
 
 export type CreateOrderMutation = { __typename?: 'Mutation', createOrder?: { __typename?: 'Order', id: string } | null };
 
+export type CreateOrderWithUserMutationVariables = Exact<{
+  email: Scalars['String'];
+  total: Scalars['Int'];
+  stripeCheckoutId: Scalars['String'];
+  items?: InputMaybe<Array<OrderItemCreateInput> | OrderItemCreateInput>;
+  userId: Scalars['ID'];
+}>;
+
+
+export type CreateOrderWithUserMutation = { __typename?: 'Mutation', createOrder?: { __typename?: 'Order', id: string } | null };
+
+export type GetUserOrdersQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetUserOrdersQuery = { __typename?: 'Query', orders: Array<(
+    { __typename?: 'Order' }
+    & { ' $fragmentRefs'?: { 'UserOrderFragment': UserOrderFragment } }
+  )> };
+
+export type UserOrderFragment = { __typename?: 'Order', id: string, total: number, orderStatus?: OrderStatus | null, createdAt: any, orderItems: Array<{ __typename?: 'OrderItem', quantity: number, product?: { __typename?: 'Product', name: string, images: Array<{ __typename?: 'Asset', url: string }> } | null }> } & { ' $fragmentName'?: 'UserOrderFragment' };
+
 export type GetCartProductsQueryVariables = Exact<{
   ids: Array<Scalars['ID']> | Scalars['ID'];
 }>;
@@ -10883,15 +11760,51 @@ export type GetProductReviewsQuery = { __typename?: 'Query', reviews: Array<(
 
 export type ProductReviewFragment = { __typename?: 'Review', id: string, name: string, content: string, headline: string, rating?: number | null } & { ' $fragmentName'?: 'ProductReviewFragment' };
 
+export type CreateUserMutationVariables = Exact<{
+  activationCode: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
+  name: Scalars['String'];
+}>;
+
+
+export type CreateUserMutation = { __typename?: 'Mutation', createAppUser?: { __typename?: 'AppUser', id: string } | null };
+
+export type GetUserByEmailQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type GetUserByEmailQuery = { __typename?: 'Query', appUser?: (
+    { __typename?: 'AppUser' }
+    & { ' $fragmentRefs'?: { 'UserFragment': UserFragment } }
+  ) | null };
+
+export type UserFragment = { __typename?: 'AppUser', id: string, name: string, email: string, password: string } & { ' $fragmentName'?: 'UserFragment' };
+
+export type PublishUserMutationVariables = Exact<{
+  activationCode: Scalars['String'];
+}>;
+
+
+export type PublishUserMutation = { __typename?: 'Mutation', publishAppUser?: { __typename?: 'AppUser', id: string } | null };
+
+export const UserOrderFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserOrder"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Order"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"total"}},{"kind":"Field","name":{"kind":"Name","value":"orderStatus"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"orderItems"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"quantity"}},{"kind":"Field","name":{"kind":"Name","value":"product"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<UserOrderFragment, unknown>;
 export const CartProductFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CartProduct"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Product"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<CartProductFragment, unknown>;
 export const ProductDetailsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ProductDetails"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Product"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<ProductDetailsFragment, unknown>;
 export const ProductListItemFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ProductListItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Product"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<ProductListItemFragment, unknown>;
 export const ProductReviewFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ProductReview"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Review"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"headline"}},{"kind":"Field","name":{"kind":"Name","value":"rating"}}]}}]} as unknown as DocumentNode<ProductReviewFragment, unknown>;
+export const UserFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"User"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AppUser"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"password"}}]}}]} as unknown as DocumentNode<UserFragment, unknown>;
 export const CompleteOrderDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CompleteOrder"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stripeCheckoutId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateOrder"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"stripeCheckoutId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stripeCheckoutId"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"orderStatus"},"value":{"kind":"EnumValue","value":"Completed"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CompleteOrderMutation, CompleteOrderMutationVariables>;
 export const CreateOrderDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateOrder"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"total"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stripeCheckoutId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"items"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"OrderItemCreateInput"}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createOrder"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"total"},"value":{"kind":"Variable","name":{"kind":"Name","value":"total"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"stripeCheckoutId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stripeCheckoutId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"orderItems"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"create"},"value":{"kind":"Variable","name":{"kind":"Name","value":"items"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CreateOrderMutation, CreateOrderMutationVariables>;
+export const CreateOrderWithUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateOrderWithUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"total"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stripeCheckoutId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"items"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"OrderItemCreateInput"}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"userId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createOrder"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"total"},"value":{"kind":"Variable","name":{"kind":"Name","value":"total"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"stripeCheckoutId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stripeCheckoutId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"orderItems"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"create"},"value":{"kind":"Variable","name":{"kind":"Name","value":"items"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"user"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"connect"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"userId"}}}]}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CreateOrderWithUserMutation, CreateOrderWithUserMutationVariables>;
+export const GetUserOrdersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetUserOrders"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orders"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"user"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UserOrder"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserOrder"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Order"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"total"}},{"kind":"Field","name":{"kind":"Name","value":"orderStatus"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"orderItems"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"quantity"}},{"kind":"Field","name":{"kind":"Name","value":"product"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUserOrdersQuery, GetUserOrdersQueryVariables>;
 export const GetCartProductsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCartProducts"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ids"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"products"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ids"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CartProduct"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CartProduct"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Product"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<GetCartProductsQuery, GetCartProductsQueryVariables>;
 export const GetProductDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getProduct"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"product"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ProductDetails"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ProductDetails"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Product"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<GetProductQuery, GetProductQueryVariables>;
 export const GetProductsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetProducts"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"skip"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"products"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"skip"},"value":{"kind":"Variable","name":{"kind":"Name","value":"skip"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ProductListItem"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ProductListItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Product"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<GetProductsQuery, GetProductsQueryVariables>;
 export const GetProductsSlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetProductsSlug"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"products"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<GetProductsSlugQuery, GetProductsSlugQueryVariables>;
 export const CreateProductReviewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateProductReview"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"review"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ReviewCreateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createReview"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"review"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CreateProductReviewMutation, CreateProductReviewMutationVariables>;
 export const GetProductReviewsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetProductReviews"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"reviews"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"product"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ProductReview"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ProductReview"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Review"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"headline"}},{"kind":"Field","name":{"kind":"Name","value":"rating"}}]}}]} as unknown as DocumentNode<GetProductReviewsQuery, GetProductReviewsQueryVariables>;
+export const CreateUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"activationCode"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createAppUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"activationCode"},"value":{"kind":"Variable","name":{"kind":"Name","value":"activationCode"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CreateUserMutation, CreateUserMutationVariables>;
+export const GetUserByEmailDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetUserByEmail"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"appUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"User"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"User"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"AppUser"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"password"}}]}}]} as unknown as DocumentNode<GetUserByEmailQuery, GetUserByEmailQueryVariables>;
+export const PublishUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"PublishUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"activationCode"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publishAppUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"activationCode"},"value":{"kind":"Variable","name":{"kind":"Name","value":"activationCode"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<PublishUserMutation, PublishUserMutationVariables>;

@@ -1,0 +1,12 @@
+query GetUserByEmail($email: String!) {
+  appUser(where: { email: $email }) {
+    ...User
+  }
+}
+
+fragment User on AppUser {
+  id
+  name
+  email
+  password
+}

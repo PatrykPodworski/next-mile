@@ -7,10 +7,15 @@ import {
   CreateOrderMutation,
   CreateOrderMutationVariables,
   CreateOrderDocument,
+  CreateOrderWithUserDocument,
+  CreateOrderWithUserMutation,
+  CreateOrderWithUserMutationVariables,
 } from "@/graphql/generated/graphql";
 import { NextApiRequest, NextApiResponse } from "next";
 import Stripe from "stripe";
 import { isRequestBody } from "./RequestBody";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./auth/[...nextauth]";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const stripeKey = process.env.STRIPE_SECRET_KEY;
@@ -57,7 +62,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   try {
-    const session = await stripe.checkout.sessions.create({
+    const stripeSession = await stripe.checkout.sessions.create({
       mode: "payment",
       locale: "pl",
       payment_method_types: ["card", "p24", "paypal"],
@@ -77,20 +82,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       })),
     });
 
-    if (!session.url) {
+    if (!stripeSession.url) {
       res.status(500).json({ message: "Missing session" });
       return;
     }
 
+    const session = await getServerSession(req, res, authOptions);
+    const userId = session?.user?.id;
+
     await apolloClient.mutate<
-      CreateOrderMutation,
-      CreateOrderMutationVariables
+      CreateOrderMutation | CreateOrderWithUserMutation,
+      CreateOrderMutationVariables | CreateOrderWithUserMutationVariables
     >({
-      mutation: CreateOrderDocument,
+      mutation: userId ? CreateOrderWithUserDocument : CreateOrderDocument,
       variables: {
         email: req.body.emailAddress,
-        stripeCheckoutId: session.id,
-        total: session.amount_total ?? 0,
+        stripeCheckoutId: stripeSession.id,
+        total: stripeSession.amount_total ?? 0,
+        userId: userId ?? "",
         items: products.map((product) => ({
           product: {
             connect: {
@@ -103,7 +112,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     });
 
-    res.json({ url: session.url });
+    res.json({ url: stripeSession.url });
     return;
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error";

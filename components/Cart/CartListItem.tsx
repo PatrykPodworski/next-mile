@@ -23,7 +23,7 @@ const CartListItem = ({
       <div className="w-96">
         <p className="text-lg font-bold text-neutral-900">{name}</p>
         <p className="truncate text-neutral-900">{description}</p>
-        <p className="font-bold text-neutral-900">{price} zł</p>
+        <p className="font-bold text-neutral-900">{price / 100} zł</p>
       </div>
       <div className="btn-group btn-group-horizontal text-neutral-900">
         <button

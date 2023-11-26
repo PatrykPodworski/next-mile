@@ -1,5 +1,6 @@
 import NavigationLink from "./NavigationLink";
 import CartLink from "./CartLink";
+import User from "./User";
 
 const Navigation = () => {
   return (
@@ -12,7 +13,10 @@ const Navigation = () => {
           <NavigationLink href="/about">About</NavigationLink>
           <NavigationLink href="/contact">Contact</NavigationLink>
         </div>
-        <CartLink />
+        <div className="flex gap-4 items-center">
+          <CartLink />
+          <User />
+        </div>
       </div>
     </nav>
   );
