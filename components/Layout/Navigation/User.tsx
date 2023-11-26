@@ -1,11 +1,14 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import NavigationLink from "./NavigationLink";
 
 const User = () => {
   const { data } = useSession();
   return (
     <>
-      {data && <div className="text-base">{`Hello, ${data.user.name}`}</div>}
+      {data && (
+        <NavigationLink href="/orders/my">{`Hello, ${data.user.name}`}</NavigationLink>
+      )}
       {data ? (
         <button className="btn btn-primary btn-sm" onClick={() => signOut()}>
           Sign out

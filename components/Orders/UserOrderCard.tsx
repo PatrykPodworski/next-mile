@@ -24,17 +24,11 @@ const UserOrderCard = ({
         </CardItemGroup>
         <CardItemGroup>
           <CardItem label="Number of items" value={numberOfItems} />
-          <CardItem label="Total" value={`${total} zł`} />
+          <CardItem label="Total" value={`${total / 100} zł`} />
         </CardItemGroup>
       </div>
     </section>
     <div className="flex flex-col gap-4">
-      <Link
-        className="self-center font-bold link text-sm leading-7 "
-        href={`/orders/${id}`}
-      >
-        View details
-      </Link>
       {imageUrl && (
         <CourseImage className="max-h-40" src={imageUrl} alt={name} />
       )}
