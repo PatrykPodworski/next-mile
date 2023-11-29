@@ -29,6 +29,7 @@ const CheckoutForm = () => {
       <button
         className={clsx("btn btn-primary", disabled && "btn-disabled")}
         type="submit"
+        data-testid="checkout-submit"
       >
         Confirm order
       </button>
