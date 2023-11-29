@@ -2,7 +2,10 @@ import { test, expect } from "@playwright/test";
 
 test("can buy product", async ({ page }) => {
   test.setTimeout(60000);
-  const baseUrl = process.env.VERCEL_URL || "http://localhost:3000";
+  const baseUrl = process.env.PLAYWRIGHT_TEST_BASE_URL;
+  if (!baseUrl) {
+    throw new Error("PLAYWRIGHT_TEST_BASE_URL is not set");
+  }
 
   await page.goto(baseUrl);
 
