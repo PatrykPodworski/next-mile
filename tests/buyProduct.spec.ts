@@ -2,7 +2,9 @@ import { test, expect } from "@playwright/test";
 
 test("can buy product", async ({ page }) => {
   test.setTimeout(60000);
-  await page.goto("http://localhost:3000/");
+  const baseUrl = process.env.VERCEL_URL || "http://localhost:3000";
+
+  await page.goto(baseUrl);
 
   await page.click('[href="/courses/page/1"]');
   await page.click('[data-testid="addToCartIconButton"]');
@@ -22,7 +24,7 @@ test("can buy product", async ({ page }) => {
   await page.fill('[id="billingName"]', "Patryk Playwright");
   await page.click('[data-testid="hosted-payment-submit-button"]');
 
-  await page.waitForURL("http://localhost:3000/**");
+  await page.waitForURL(`${baseUrl}/**`);
 
   const heading = page.locator("h1");
   await expect(heading).toHaveText("Success!");
