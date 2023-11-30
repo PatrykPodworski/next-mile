@@ -6,10 +6,10 @@ on:
     
 jobs:
   test:
-  permissions:
-    pull-requests: write
-  timeout-minutes: 5
-  runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
     steps:
     - name: Add comment to PR
       id: loading_comment_to_pr
