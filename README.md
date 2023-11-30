@@ -4,7 +4,27 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 Setup the local envs:
 ```bash
+# Next.js
+NEXT_PUBLIC_APP_URL = ""
+
+# GraphQL
 NEXT_PUBLIC_GRAPHQL_URL = ""
+
+# MailerLite
+MAILER_LITE_API_TOKEN = ""
+MAILER_LITE_GROUP_ID = ""
+
+# Stripe
+STRIPE_SECRET_KEY = ""
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = ""
+STRIPE_WEBHOOK_SECRET = ""
+
+# NextAuth
+NEXTAUTH_URL = ""
+NEXTAUTH_SECRET = ""
+
+# Playwright
+PLAYWRIGHT_TEST_BASE_URL = ""
 ```
 
 Install the dependencies:
