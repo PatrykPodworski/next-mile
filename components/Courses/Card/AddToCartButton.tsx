@@ -12,7 +12,11 @@ const AddToCartButton = ({ id, size }: AddToCartButtonProps) => {
 
   if (size === "icon") {
     return (
-      <button className="btn btn-primary btn-sm btn-square" onClick={onClick}>
+      <button
+        className="btn btn-primary btn-sm btn-square"
+        onClick={onClick}
+        data-testid="addToCartIconButton"
+      >
         <PlusIcon className="w-5 h-5" />
       </button>
     );
