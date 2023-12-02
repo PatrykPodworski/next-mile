@@ -1,48 +1,38 @@
 name: Playwright Tests
-
 on:
-  issue_comment:
-    types: [edited]
-    
+  pull_request:
+    branches: [main, master]
 jobs:
   test:
-    permissions:
-      pull-requests: write
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
-    - name: Add comment to PR
-      id: loading_comment_to_pr
-      uses: marocchino/sticky-pull-request-comment@v2.8.0
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        number: ${{ github.event.issue.number }}
-        header: playwright
-        message: |
-          Running Playwright tests...
-    - name: Capture Vercel preview URL
-      id: vercel_preview_url
-      uses: aaimio/vercel-preview-url-action@v2.2.0
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 18
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
-      env:
-        PLAYWRIGHT_TEST_BASE_URL: ${{ steps.vercel_preview_url.outputs.vercel_preview_url }}
-    - name: Add comment to PR
-      id: comment_to_pr
-      uses: marocchino/sticky-pull-request-comment@v2.8.0
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        number: ${{ github.event.issue.number }}
-        header: playwright
-        message: |
-          Playwright tests finished.
+      - run: sleep 30
+      - name: vercel-preview-url
+        uses: zentered/vercel-preview-url@v1.1.9
+        id: vercel_preview_url
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        with:
+          vercel_project_id: ${{ secrets.PROJECT_ID }}
+      - name: Get URL
+        run: echo "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: npx playwright test
+        env:
+          PLAYWRIGHT_TEST_BASE_URL: "https://${{ steps.vercel_preview_url.outputs.preview_url }}"
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
