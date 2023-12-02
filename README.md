@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 Setup the local envs:
 ```bash
 # Next.js
-NEXT_PUBLIC_APP_URL = ""
+VERCEL_URL = ""
 
 # GraphQL
 NEXT_PUBLIC_GRAPHQL_URL = ""
