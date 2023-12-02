@@ -6,7 +6,8 @@ const Home = () => {
           Welcome to Our Online Store!
         </p>
         <p className="text-lg text-gray-600">
-          Explore our wide range of courses and find the perfect topics for you.
+          Explore our vast collection of courses and discover the perfect topics
+          that will help you enhance your skills and knowledge.
         </p>
       </div>
     </>
