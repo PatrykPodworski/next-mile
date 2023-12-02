@@ -61,19 +61,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     };
   });
 
-  console.log(
-    "success_url",
-    `${process.env.VERCEL_URL}/orders/success?session_id={CHECKOUT_SESSION_ID}`
-  );
-  console.log("cancel_url", `${process.env.VERCEL_URL}/orders/cancel`);
+  const successUrl = `https://${process.env.VERCEL_URL}/orders/success?session_id={CHECKOUT_SESSION_ID}`;
+  const cancelUrl = `https://${process.env.VERCEL_URL}/orders/cancel`;
+
+  console.log("success_url", successUrl);
+  console.log("cancel_url", cancelUrl);
+  console.log("VERCEL_URL", process.env.VERCEL_URL);
+  console.log("NEXT_PUBLIC_APP_URL", process.env.NEXT_PUBLIC_APP_URL);
 
   try {
     const stripeSession = await stripe.checkout.sessions.create({
       mode: "payment",
       locale: "pl",
       payment_method_types: ["card", "p24", "paypal"],
-      success_url: `${process.env.VERCEL_URL}/orders/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.VERCEL_URL}/orders/cancel`,
+      success_url: successUrl,
+      cancel_url: cancelUrl,
       line_items: products.map((product) => ({
         quantity: product.quantity,
         price_data: {
