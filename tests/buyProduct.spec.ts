@@ -36,7 +36,11 @@ test("can buy product", async ({ page }) => {
   // );
 
   const heading = page.locator('[data-testid="success-heading"]');
-  await heading.waitFor({ timeout: 20000 });
+
+  for (let i = 0; i < 20; i++) {
+    console.log(page.url());
+    await page.waitForTimeout(1000);
+  }
 
   await expect(heading).toHaveText("Success!");
 });
