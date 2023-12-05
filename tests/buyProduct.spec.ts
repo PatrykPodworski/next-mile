@@ -27,20 +27,10 @@ test("can buy product", async ({ page }) => {
   await page.fill('[id="billingName"]', "Patryk Playwright");
   await page.click('[data-testid="hosted-payment-submit-button"]');
 
-  // await page.waitForURL(
-  //   (url) => {
-  //     console.log(url.href, "vs", `${baseUrl}/orders/success`);
-  //     return url.href.startsWith(`${baseUrl}/orders/success`);
-  //   },
-  //   { timeout: 120000 }
-  // );
+  await page.waitForURL((url) => {
+    return url.href.startsWith(`${baseUrl}/orders/success`);
+  });
 
   const heading = page.locator('[data-testid="success-heading"]');
-
-  for (let i = 0; i < 20; i++) {
-    console.log(page.url());
-    await page.waitForTimeout(1000);
-  }
-
   await expect(heading).toHaveText("Success!");
 });
