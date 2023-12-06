@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test("can buy product", async ({ page }) => {
-  test.setTimeout(240000);
+  test.setTimeout(60000);
   const baseUrl = process.env.PLAYWRIGHT_TEST_BASE_URL;
   if (!baseUrl) {
     throw new Error("PLAYWRIGHT_TEST_BASE_URL is missing");
@@ -27,9 +27,12 @@ test("can buy product", async ({ page }) => {
   await page.fill('[id="billingName"]', "Patryk Playwright");
   await page.click('[data-testid="hosted-payment-submit-button"]');
 
-  await page.waitForURL((url) => {
-    return url.href.startsWith(`${baseUrl}/orders/success`);
-  });
+  await page.waitForURL(
+    (url) => {
+      return url.href.startsWith(`${baseUrl}/orders/success`);
+    },
+    { timeout: 10000 }
+  );
 
   const heading = page.locator('[data-testid="success-heading"]');
   await expect(heading).toHaveText("Success!");
