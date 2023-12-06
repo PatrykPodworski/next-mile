@@ -47,7 +47,7 @@ const getStripeEvent = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const stripe = new Stripe(stripeKey, { apiVersion: "2023-08-16" });
+  const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
   const sig = req.headers["stripe-signature"] ?? "";
   const rawBody = await getRawBody(req);
 
