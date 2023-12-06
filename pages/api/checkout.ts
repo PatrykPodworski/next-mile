@@ -35,7 +35,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const stripe = new Stripe(stripeKey, { apiVersion: "2023-08-16" });
+  const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
 
   const items = req.body.items;
   const { data, error } = await apolloClient.query<
