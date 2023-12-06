@@ -20,10 +20,8 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
           deployment-url: ${{ steps.vercel_preview_url.outputs.preview_url }}
-          timeout: 180 # Wait for 10 seconds before failing
-          poll-interval: 15 # Wait for 1 second before each retry
-      - name: Display deployment status
-        run: "echo The deployment at ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).url }} is ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).readyState }}"
+          timeout: 180
+          poll-interval: 15
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
