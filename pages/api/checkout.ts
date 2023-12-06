@@ -66,8 +66,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       mode: "payment",
       locale: "pl",
       payment_method_types: ["card", "p24", "paypal"],
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/orders/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/orders/cancel`,
+      success_url: `https://${process.env.VERCEL_URL}/orders/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://${process.env.VERCEL_URL}/orders/cancel`,
       line_items: products.map((product) => ({
         quantity: product.quantity,
         price_data: {

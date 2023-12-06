@@ -1,7 +1,6 @@
 import { test, expect } from "@playwright/test";
 
 test("can buy product", async ({ page }) => {
-  test.setTimeout(60000);
   const baseUrl = process.env.PLAYWRIGHT_TEST_BASE_URL;
   if (!baseUrl) {
     throw new Error("PLAYWRIGHT_TEST_BASE_URL is missing");
@@ -25,10 +24,19 @@ test("can buy product", async ({ page }) => {
   await page.fill('[id="cardExpiry"]', "1025");
   await page.fill('[id="cardCvc"]', "123");
   await page.fill('[id="billingName"]', "Patryk Playwright");
+
+  const billingCountry = await page.$('[id="billingCountry"]');
+  await billingCountry?.selectOption("PL");
+
+  const billingPostalCode = await page.$('[id="billingPostalCode"]');
+  await billingPostalCode?.fill("82-310");
+
   await page.click('[data-testid="hosted-payment-submit-button"]');
 
-  await page.waitForURL(`${baseUrl}/**`);
+  await page.waitForURL((url) => {
+    return url.href.startsWith(`${baseUrl}/orders/success`);
+  });
 
-  const heading = page.locator("h1");
+  const heading = page.locator('[data-testid="success-heading"]');
   await expect(heading).toHaveText("Success!");
 });

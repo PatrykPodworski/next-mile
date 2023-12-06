@@ -7,7 +7,6 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
-      - run: sleep 120
       - name: vercel-preview-url
         uses: zentered/vercel-preview-url@v1.1.9
         id: vercel_preview_url
@@ -15,6 +14,14 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         with:
           vercel_project_id: ${{ secrets.PROJECT_ID }}
+      - uses: UnlyEd/github-action-await-vercel@v1.2.43
+        id: await-vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        with:
+          deployment-url: ${{ steps.vercel_preview_url.outputs.preview_url }}
+          timeout: 180
+          poll-interval: 15
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
