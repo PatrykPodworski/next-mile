@@ -11,8 +11,8 @@ const UserOrderCard = ({
   numberOfItems,
   imageUrl,
 }: UserOrderCardProps) => (
-  <div className="bg-white p-4 shadow flex gap-4">
-    <section className="flex-shrink-0 w-2/3">
+  <div className="bg-white  shadow flex gap-4">
+    <section className="flex-shrink-0 w-2/3 p-4">
       <div className="flex gap-2 items-baseline justify-between">
         <p className="font-bold text-lg">Order: {name}</p>
         <p className="text-xs">{createdAt}</p>
@@ -30,7 +30,12 @@ const UserOrderCard = ({
     </section>
     <div className="flex flex-col gap-4">
       {imageUrl && (
-        <CourseImage className="max-h-40" src={imageUrl} alt={name} />
+        <CourseImage
+          className="max-h-40"
+          src={imageUrl}
+          alt={name}
+          sizes="320"
+        />
       )}
     </div>
   </div>

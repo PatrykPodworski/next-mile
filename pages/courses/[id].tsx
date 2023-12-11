@@ -1,3 +1,4 @@
+import AddToCartButton from "@/components/Courses/Card/AddToCartButton";
 import CourseImage from "@/components/Courses/CourseImage";
 import Markdown from "@/components/Markdown";
 import ReviewsContainer from "@/components/ReviewsContainer";
@@ -23,6 +24,8 @@ const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
     return <div>Product not found</div>;
   }
 
+  const imageUrl = data.images[0]?.url;
+
   return (
     <>
       <NextSeo
@@ -34,7 +37,7 @@ const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
           title: data.name,
           images: [
             {
-              url: data.images[0].url,
+              url: imageUrl,
               alt: data.name,
               type: "image/jpeg",
             },
@@ -49,9 +52,10 @@ const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
       </Link>
       <div className="flex gap-8 my-8">
         <CourseImage
-          src={data.images[0].url}
+          src={imageUrl}
           alt={data.name}
-          className="p-2 shadow-xl basis-2/3"
+          className="shadow-xl basis-2/3"
+          sizes="1000px"
         />
         <div>
           <h1 className="text-4xl font-bold mb-4 text-neutral-900">
@@ -61,7 +65,7 @@ const Course = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
             <p className="text-lg text-neutral-700 italic shrink-0">{`${
               data.price / 100
             } zł`}</p>
-            {/* <AddToCartButton item={data} /> */}
+            <AddToCartButton id={data.id} size="standard" />
           </div>
         </div>
       </div>
