@@ -64,7 +64,7 @@ export const getServerSideProps = async (
     total: x.total,
     numberOfItems: x.orderItems.reduce((acc, curr) => acc + curr.quantity, 0),
     name: getOrderName(x.orderItems),
-    imageUrl: x.orderItems[0]?.product?.images[0]?.url,
+    imageUrl: x.orderItems[0]?.product?.images[0]?.url ?? null,
   }));
 
   return {

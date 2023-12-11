@@ -52,7 +52,7 @@ export type UserOrderCardProps = {
   status: string;
   total: number;
   numberOfItems: number;
-  imageUrl?: string;
+  imageUrl: string | null;
 };
 
 export default UserOrderCard;
