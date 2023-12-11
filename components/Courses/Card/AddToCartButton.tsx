@@ -24,7 +24,7 @@ const AddToCartButton = ({ id, size }: AddToCartButtonProps) => {
 
   return (
     <button className="btn-ghost btn btn-sm" onClick={onClick}>
-      <PlusIcon className="w-6 h-6 mr-4" /> Add to cart
+      <PlusIcon className="w-6 h-6" /> Add to cart
     </button>
   );
 };

@@ -26,7 +26,7 @@ const Courses = ({
 
   return (
     <>
-      <h1 className="text-4xl font-bold my-4 text-neutral-900">
+      <h1 className="text-xl font-bold mb-4 text-neutral-900">
         Courses selected for you
       </h1>
       <CourseList courses={products} />
