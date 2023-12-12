@@ -5,6 +5,7 @@ query getProduct($slug: String!) {
 }
 
 fragment ProductDetails on Product {
+  id
   slug
   name
   price

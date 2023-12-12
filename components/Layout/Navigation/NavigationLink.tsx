@@ -4,17 +4,22 @@ import { useRouter } from "next/router";
 
 const NavigationLink = ({ href, children, className }: NavigationLinkProps) => {
   const router = useRouter();
+  const isActive = isActiveRoute(router.pathname, href);
 
   return (
     <Link
-      className={clsx(
-        "p-4 hover:bg-gray-700 ease-in-out transition-all duration-300",
-        isActiveRoute(router.route, href) && "border-primary border-b-4 pb-3",
-        className
-      )}
+      className={clsx("p-4 hover:bg-gray-700 relative", className)}
       href={href}
     >
-      {children}
+      <>
+        <div
+          className={clsx(
+            "absolute bottom-0 left-0 w-full h-1 bg-primary transition-opacity duration-300",
+            isActive ? "opacity-100" : "opacity-0"
+          )}
+        />
+        {children}
+      </>
     </Link>
   );
 };

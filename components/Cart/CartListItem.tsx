@@ -13,13 +13,18 @@ const CartListItem = ({
 }: CartListItemProps) => {
   const { addItem, removeItem } = useCartState();
 
+  const imageUrl = images[0]?.url;
+
   return (
     <div className="flex items-center gap-8 border-neutral-200 border-t py-8">
-      <CourseImage
-        src={images[0].url}
-        alt={name}
-        className="shadow-md w-40 p-1"
-      />
+      {imageUrl && (
+        <CourseImage
+          src={imageUrl}
+          alt={name}
+          className="shadow-md w-40"
+          sizes="160"
+        />
+      )}
       <div className="w-96">
         <p className="text-lg font-bold text-neutral-900">{name}</p>
         <p className="truncate text-neutral-900">{description}</p>
