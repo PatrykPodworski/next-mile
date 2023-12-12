@@ -1,3 +1,5 @@
+"use client";
+
 import ShoppingBag from "@/components/icons/ShoppingBag";
 import NavigationLink from "./NavigationLink";
 import useCartState from "@/components/Cart/context/useCartState";

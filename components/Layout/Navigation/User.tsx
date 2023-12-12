@@ -1,18 +1,17 @@
-import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import NavigationLink from "./NavigationLink";
+import { getServerSession } from "next-auth";
+import SignOutButton from "./SignOutButton";
 
-const User = () => {
-  const { data } = useSession();
+const User = async () => {
+  const session = await getServerSession();
   return (
     <>
-      {data && (
-        <NavigationLink href="/orders/my">{`Hello, ${data.user.name}`}</NavigationLink>
+      {session && (
+        <NavigationLink href="/orders/my">{`Hello, ${session.user.name}`}</NavigationLink>
       )}
-      {data ? (
-        <button className="btn btn-primary btn-sm" onClick={() => signOut()}>
-          Sign out
-        </button>
+      {session ? (
+        <SignOutButton />
       ) : (
         <Link href="/auth/sign-up" className="btn btn-primary btn-sm">
           Sign up

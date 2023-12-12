@@ -1,10 +1,10 @@
-import { NextSeoProps } from "next-seo";
+import { Metadata } from "next";
 
 const title = "Next Mile";
 const description =
   "Next Mile is a platform for learning new skills in a fun and engaging way.";
 
-const nextSeoConfig: NextSeoProps = {
+const defaultMetadata: Metadata = {
   title,
   description,
   openGraph: {
@@ -15,4 +15,4 @@ const nextSeoConfig: NextSeoProps = {
   },
 };
 
-export default nextSeoConfig;
+export default defaultMetadata;

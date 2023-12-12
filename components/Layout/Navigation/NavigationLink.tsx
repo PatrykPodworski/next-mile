@@ -1,10 +1,12 @@
+"use client";
+
 import clsx from "clsx";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 const NavigationLink = ({ href, children, className }: NavigationLinkProps) => {
-  const router = useRouter();
-  const isActive = isActiveRoute(router.pathname, href);
+  const pathName = usePathname();
+  const isActive = isActiveRoute(pathName, href);
 
   return (
     <Link
@@ -24,9 +26,13 @@ const NavigationLink = ({ href, children, className }: NavigationLinkProps) => {
   );
 };
 
-const isActiveRoute = (route: string, href: string) => {
+const isActiveRoute = (route: string | null, href: string) => {
   if (href === "/") {
     return href === route;
+  }
+
+  if (!route) {
+    return false;
   }
 
   const mainRoutePart = route.split("/")[1] ?? "";
