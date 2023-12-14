@@ -1,3 +1,5 @@
+"use client";
+
 import PlusIcon from "@/components/icons/PlusIcon";
 import { CartItem } from "@/components/Cart/context/CartContext";
 import useCartState from "@/components/Cart/context/useCartState";
@@ -23,7 +25,10 @@ const AddToCartButton = ({ id, size }: AddToCartButtonProps) => {
   }
 
   return (
-    <button className="btn-ghost btn btn-sm" onClick={onClick}>
+    <button
+      className="btn-ghost btn btn-sm hover:bg-neutral-100"
+      onClick={onClick}
+    >
       <PlusIcon className="w-6 h-6" /> Add to cart
     </button>
   );

@@ -7,7 +7,13 @@ const LinkPaginationItem = ({
   active,
   href,
 }: LinkPaginationItemProps) => (
-  <Link href={href} className={clsx("btn btn-ghost", active && "btn-active")}>
+  <Link
+    href={href}
+    className={clsx(
+      "btn btn-ghost hover:bg-neutral-100",
+      active && "font-bold text-xl"
+    )}
+  >
     {children}
   </Link>
 );
