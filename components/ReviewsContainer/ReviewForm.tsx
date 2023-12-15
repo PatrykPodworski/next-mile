@@ -1,3 +1,4 @@
+"use client";
 import clsx from "clsx";
 import TextInput from "../inputs/TextInput";
 import useReviewForm from "./useReviewForm";
@@ -40,7 +41,10 @@ const ReviewForm = ({ slug }: ReviewFormProps) => {
       />
       <button
         disabled={loading}
-        className={clsx("btn btn-primary", loading && "btn-disabled")}
+        className={clsx(
+          "btn mt-4 border-neutral-300",
+          loading && "btn-disabled"
+        )}
         type="submit"
       >
         Add

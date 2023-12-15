@@ -21,7 +21,7 @@ const TextInput = forwardRef(
         </label>
       )}
       <input
-        className="input input-bordered input-sm"
+        className="input input-bordered input-sm border-neutral-300"
         type={type}
         ref={ref}
         placeholder={placeholder}

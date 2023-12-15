@@ -1,3 +1,4 @@
+"use client";
 import { useQuery } from "@apollo/client";
 import {
   GetProductReviewsDocument,
@@ -20,7 +21,9 @@ const ReviewsList = ({ slug }: ReviewsListProps) => {
   }
 
   if (reviews.length === 0) {
-    return null;
+    return (
+      <p className="basis-1/2 text-lg">No reviews yet. Be the first! 🎉</p>
+    );
   }
 
   return (
