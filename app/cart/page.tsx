@@ -1,12 +1,15 @@
+"use client";
+
 import CartList from "@/components/Cart/CartList";
 import OrderSummary from "@/components/Cart/OrderSummary";
 import useGetCartItems from "@/components/Cart/useGetCartItems";
+import { notFound } from "next/navigation";
 
 const CartPage = () => {
   const { items, loading, error, totalPrice } = useGetCartItems();
 
   if (error) {
-    return <p>Error: {error.message}</p>;
+    notFound();
   }
 
   if (loading || !items) {
@@ -15,11 +18,8 @@ const CartPage = () => {
 
   return (
     <>
-      <h1 className="text-base my-8 text-neutral-900">Shopping cart</h1>
       <div className="flex gap-16 items-start">
-        <div>
-          <CartList items={items} />
-        </div>
+        <CartList items={items} />
         <OrderSummary totalPrice={totalPrice} />
       </div>
     </>
