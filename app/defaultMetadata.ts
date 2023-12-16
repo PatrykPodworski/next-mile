@@ -4,9 +4,15 @@ const title = "Next Mile";
 const description =
   "Next Mile is a platform for learning new skills in a fun and engaging way.";
 
+const baseUrl = process.env.VERCEL_URL;
+if (!baseUrl) {
+  throw new Error("Missing VERCEL_URL");
+}
+
 const defaultMetadata: Metadata = {
   title,
   description,
+  metadataBase: new URL(baseUrl),
   openGraph: {
     url: "https://next-mile.vercel.app",
     title,
