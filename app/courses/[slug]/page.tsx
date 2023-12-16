@@ -76,9 +76,9 @@ export const generateStaticParams = async () => {
     query: GetProductsSlugDocument,
   });
 
-  return data.products.map((x) => {
-    x.slug;
-  });
+  return data.products.map((x) => ({
+    slug: x.slug,
+  }));
 };
 
 export const generateMetadata = async ({

@@ -37,13 +37,13 @@ export default Page;
 
 const PRODUCTS_PER_PAGE = 8;
 
-export async function generateStaticParams() {
+export const generateStaticParams = async () => {
   const numberOfPages = await getNumberOfPages();
 
   return Array.from(Array(numberOfPages).keys()).map((x) => ({
     page: (x + 1).toString(),
   }));
-}
+};
 
 const getProductPage = async (pageIndex: number) => {
   const { data, error } = await apolloClient.query({
