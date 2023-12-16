@@ -1,6 +1,6 @@
 import Link from "next/link";
-import useCartState from "./context/useCartState";
 import clsx from "clsx";
+import useCartState from "@/components/Cart/context/useCartState";
 
 const OrderSummary = ({ totalPrice }: OrderSummaryProps) => {
   const { items } = useCartState();

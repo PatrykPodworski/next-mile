@@ -1,5 +1,4 @@
 import CourseImage from "@/components/Courses/CourseImage";
-import { CartItem } from "./context/CartContext";
 import useCartState from "./context/useCartState";
 import { CartProductFragment } from "@/graphql/generated/graphql";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import CartList from "@/components/Cart/CartList";
-import OrderSummary from "@/components/Cart/OrderSummary";
+import OrderSummary from "@/app/cart/OrderSummary";
 import useGetCartItems from "@/components/Cart/useGetCartItems";
 import { notFound } from "next/navigation";
 
