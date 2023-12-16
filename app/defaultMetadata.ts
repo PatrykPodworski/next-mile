@@ -12,7 +12,7 @@ if (!baseUrl) {
 const defaultMetadata: Metadata = {
   title,
   description,
-  metadataBase: new URL(baseUrl),
+  metadataBase: new URL(`https://${process.env.VERCEL_URL}`),
   openGraph: {
     url: "https://next-mile.vercel.app",
     title,
