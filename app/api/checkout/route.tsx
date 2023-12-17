@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import Stripe from "stripe";
+import { ValidationError } from "yup";
 import { authOptions } from "@/_pages/api/auth/[...nextauth]";
-import isRequestBody, { Item } from "@/app/api/checkout/isRequestBody";
 import apolloClient from "@/graphql/apolloClient";
 import { useFragment as getFragmentData } from "@/graphql/generated";
 import {
@@ -17,12 +17,12 @@ import {
   GetCartProductsQuery,
   GetCartProductsQueryVariables,
 } from "@/graphql/generated/graphql";
+import bodySchema, { Item } from "./bodySchema";
 
 // TODO: Refactor
 export const POST = async (request: NextRequest) => {
   const stripeKey = process.env.STRIPE_SECRET_KEY;
 
-  console.log(process.env);
   if (!stripeKey) {
     return NextResponse.json(
       { error: "Missing Stripe configuration" },
@@ -30,38 +30,30 @@ export const POST = async (request: NextRequest) => {
     );
   }
 
-  const body = await request.json();
-  if (!isRequestBody(body)) {
-    return NextResponse.json(
-      { error: "Invalid request body" },
-      { status: 400 }
-    );
-  }
-
-  const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
-  const items = body.items;
-
-  const { data, error } = await apolloClient.query<
-    GetCartProductsQuery,
-    GetCartProductsQueryVariables
-  >({
-    query: GetCartProductsDocument,
-    variables: {
-      ids: items.map((x) => x.id),
-    },
-  });
-
-  if (error || !data) {
-    return NextResponse.json(
-      { error: "Error fetching products" },
-      { status: 500 }
-    );
-  }
-
-  const products = data.products.map((x) => mapProduct(x, items));
-  const lineItems = products.map(mapLineItem);
-
   try {
+    const body = await bodySchema.validate(await request.json());
+
+    const { data, error } = await apolloClient.query<
+      GetCartProductsQuery,
+      GetCartProductsQueryVariables
+    >({
+      query: GetCartProductsDocument,
+      variables: {
+        ids: body.items.map((x) => x.id),
+      },
+    });
+
+    if (error || !data) {
+      return NextResponse.json(
+        { error: "Error fetching products" },
+        { status: 500 }
+      );
+    }
+
+    const products = data.products.map((x) => mapProduct(x, body.items));
+    const lineItems = products.map(mapLineItem);
+
+    const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
     const stripeSession = await stripe.checkout.sessions.create({
       mode: "payment",
       locale: "pl",
@@ -105,6 +97,10 @@ export const POST = async (request: NextRequest) => {
 
     return NextResponse.json({ url: stripeSession.url });
   } catch (error) {
+    if (error instanceof ValidationError) {
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
+
     const message = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json({ error: message }, { status: 500 });
   }
