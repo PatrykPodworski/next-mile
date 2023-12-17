@@ -3,13 +3,16 @@ type RequestBody = {
   name: string;
   address: string;
   phone: string;
-  items: {
-    id: string;
-    quantity: number;
-  }[];
+  items: Item[];
 };
 
-export const isRequestBody = (body: any): body is RequestBody => {
+export type Item = {
+  id: string;
+  quantity: number;
+};
+
+// TODO: Replace with Zod
+const isRequestBody = (body: any): body is RequestBody => {
   if (typeof body !== "object") {
     return false;
   }
@@ -50,4 +53,4 @@ export const isRequestBody = (body: any): body is RequestBody => {
   return true;
 };
 
-export default RequestBody;
+export default isRequestBody;

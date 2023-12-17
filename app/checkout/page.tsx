@@ -1,12 +1,15 @@
+"use client";
+
 import CartList from "@/components/Cart/CartList";
 import useGetCartItems from "@/components/Cart/useGetCartItems";
-import CheckoutForm from "@/components/CheckoutForm";
+import CheckoutForm from "@/app/checkout/CheckoutForm";
+import { notFound } from "next/navigation";
 
 const CheckoutPage = () => {
   const { items, loading, error } = useGetCartItems();
 
   if (error) {
-    return <p>Error: {error.message}</p>;
+    notFound();
   }
 
   if (loading || !items) {

@@ -6,8 +6,11 @@ const CheckoutForm = () => {
   const { register, errors, submit, disabled } = useCheckoutForm();
 
   return (
-    <form className="basis-1/2 max-w-md flex flex-col" onSubmit={submit}>
-      <section className="flex flex-col gap-2 border-b border-neutral-200 mb-4">
+    <form
+      className="basis-1/2 max-w-xs flex flex-col shrink-0"
+      onSubmit={submit}
+    >
+      <section className="flex flex-col gap-2 mb-4">
         <h1 className="text-xl text-neutral-900">Contact</h1>
         <TextInput
           label={"Email Address"}
@@ -27,7 +30,7 @@ const CheckoutForm = () => {
         />
       </section>
       <button
-        className={clsx("btn btn-primary", disabled && "btn-disabled")}
+        className={clsx("btn border-neutral-300", disabled && "btn-disabled")}
         type="submit"
         data-testid="checkout-submit"
       >

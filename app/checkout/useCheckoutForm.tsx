@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import { object, string, InferType } from "yup";
+import { useSession } from "next-auth/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import emailSchema from "@/utils/emailSchema";
 import useGetCartItems from "@/components/Cart/useGetCartItems";
-import useCartState from "../Cart/context/useCartState";
-import { useSession } from "next-auth/react";
+import useCartState from "@/components/Cart/context/useCartState";
 
 const schema = object().shape({
   emailAddress: emailSchema,
