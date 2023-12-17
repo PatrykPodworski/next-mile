@@ -1,7 +1,4 @@
-import { useRouter } from "next/router";
-import Layout from "../../components/Layout";
-
-const Cancel = () => {
+const CancelPage = () => {
   return (
     <main className="flex flex-col justify-center items-center">
       <h1 className="text-4xl font-bold">Order Canceled</h1>
@@ -10,4 +7,4 @@ const Cancel = () => {
   );
 };
 
-export default Cancel;
+export default CancelPage;
