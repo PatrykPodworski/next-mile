@@ -1,17 +1,18 @@
-const Home = () => {
+const HomePage = () => {
   return (
     <>
-      <div className="flex flex-col items-center">
-        <p className="text-xl font-bold text-green-500">
+      <main className="flex flex-col justify-center items-center">
+        <h1 className="text-4xl font-bold" data-testid="success-heading">
           Welcome to Our Online Store!
-        </p>
-        <p className="text-lg text-gray-600">
+        </h1>
+        <p className="text-lg text-gray-600 max-w-prose">
           Explore our vast collection of courses and discover the perfect topics
-          that will help you enhance your skills and knowledge.
+          that will help you enhance your skills and knowledge. Still, you
+          can&apos;t but anything.
         </p>
-      </div>
+      </main>
     </>
   );
 };
 
-export default Home;
+export default HomePage;
