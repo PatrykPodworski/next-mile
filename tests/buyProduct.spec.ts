@@ -1,11 +1,8 @@
 import { test, expect } from "@playwright/test";
+import { getBaseUrl } from "./helpers";
 
 test("can buy product", async ({ page }) => {
-  const baseUrl = process.env.PLAYWRIGHT_TEST_BASE_URL;
-  if (!baseUrl) {
-    throw new Error("PLAYWRIGHT_TEST_BASE_URL is missing");
-  }
-
+  const baseUrl = getBaseUrl();
   await page.goto(baseUrl);
 
   await page.click('[href="/courses/page/1"]');

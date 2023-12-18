@@ -4,7 +4,10 @@ const SubmitMessage = ({ hasFailed }: SubmitMessageProps) =>
       Something went wrong. Please try again.
     </p>
   ) : (
-    <p className="text-l font-bold text-green-500">
+    <p
+      className="text-l font-bold text-green-500"
+      data-testid="newsletter-success"
+    >
       Thank you for subscribing!
     </p>
   );

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 
 const schema = object().shape({
-  email: emailSchema,
+  emailAddress: emailSchema,
 });
 
 type FormData = InferType<typeof schema>;

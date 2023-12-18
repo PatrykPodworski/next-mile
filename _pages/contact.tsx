@@ -28,12 +28,13 @@ const Contact = () => {
           <form className="flex mt-4 w-full" onSubmit={submit}>
             <TextInput
               placeholder="Your email address"
-              error={errors.email}
-              {...register("email")}
+              error={errors.emailAddress}
+              {...register("emailAddress")}
               className="w-full mr-4"
               disabled={isSubmitting}
             />
             <button
+              data-testid="newsletter-submit"
               className="btn btn-primary btn-sm"
               disabled={!isValid || isSubmitting}
             >
