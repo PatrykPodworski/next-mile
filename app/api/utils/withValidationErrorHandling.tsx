@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { ValidationError } from "yup";
 
 const withValidationErrorHandling = <T,>(
-  handler: (request: NextRequest) => T
+  handler: (request: NextRequest) => Promise<T>
 ) => {
   return async (request: NextRequest) => {
     try {
