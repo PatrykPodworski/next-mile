@@ -8,8 +8,10 @@ const Navigation = () => {
       <div className="max-w-5xl m-auto items-center flex justify-between">
         <div className="flex gap-2">
           <NavigationLink href="/">Home</NavigationLink>
-          <NavigationLink href="/courses/page/1">Courses</NavigationLink>
-          <NavigationLink href="/deals">Deals</NavigationLink>
+          <NavigationLink href="/courses/page/1" activeMatch="/courses/page">
+            Courses
+          </NavigationLink>
+          <NavigationLink href="/courses/deals">Deals</NavigationLink>
           <NavigationLink href="/about">About</NavigationLink>
           <NavigationLink href="/contact">Contact</NavigationLink>
         </div>

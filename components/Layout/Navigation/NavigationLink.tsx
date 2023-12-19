@@ -4,9 +4,14 @@ import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const NavigationLink = ({ href, children, className }: NavigationLinkProps) => {
+const NavigationLink = ({
+  href,
+  children,
+  className,
+  activeMatch,
+}: NavigationLinkProps) => {
   const pathName = usePathname();
-  const isActive = isActiveRoute(pathName, href);
+  const isActive = isActiveRoute(pathName, activeMatch ?? href);
 
   return (
     <Link
@@ -26,24 +31,18 @@ const NavigationLink = ({ href, children, className }: NavigationLinkProps) => {
   );
 };
 
-const isActiveRoute = (route: string | null, href: string) => {
-  if (href === "/") {
-    return href === route;
+const isActiveRoute = (route: string, href: string) => {
+  if (route === "/") {
+    return route === href;
   }
-
-  if (!route) {
-    return false;
-  }
-
-  const mainRoutePart = route.split("/")[1] ?? "";
-  const mainHrefPart = href.split("/")[1] ?? "";
-  return mainRoutePart === mainHrefPart;
+  return route.startsWith(href);
 };
 
 type NavigationLinkProps = {
   href: string;
   children: React.ReactNode;
   className?: string;
+  activeMatch?: string;
 };
 
 export default NavigationLink;
