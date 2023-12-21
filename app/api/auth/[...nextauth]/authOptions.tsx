@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import {
@@ -6,10 +6,12 @@ import {
   GetUserByEmailQuery,
   GetUserByEmailQueryVariables,
   UserFragment,
+  UserFragmentDoc,
 } from "@/graphql/generated/graphql";
 import apolloClient from "@/graphql/apolloClient";
+import { useFragment as getFragmentData } from "@/graphql/generated";
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -32,7 +34,7 @@ export const authOptions: NextAuthOptions = {
           },
         });
 
-        const user = isUser(data.appUser) ? data.appUser : null;
+        const user = getFragmentData(UserFragmentDoc, data.appUser);
 
         if (error || !data || !user) {
           return null;
@@ -69,8 +71,4 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
-export default NextAuth(authOptions);
-
-const isUser = (x: any): x is UserFragment => {
-  return x?.__typename === "AppUser";
-};
+export default authOptions;

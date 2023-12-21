@@ -1,6 +1,5 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]";
 import apolloClient from "@/graphql/apolloClient";
 import {
   GetUserOrdersDocument,
@@ -11,6 +10,7 @@ import {
 import UserOrderCard, {
   UserOrderCardProps,
 } from "@/components/Orders/UserOrderCard";
+import authOptions from "@/app/api/auth/[...nextauth]/authOptions";
 
 const MyOthersPage = ({
   data,
