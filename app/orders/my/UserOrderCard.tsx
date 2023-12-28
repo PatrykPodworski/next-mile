@@ -1,5 +1,5 @@
 import Link from "next/link";
-import CourseImage from "../Courses/CourseImage";
+import CourseImage from "../../../components/Courses/CourseImage";
 import CardItem from "./CardItem";
 
 const UserOrderCard = ({

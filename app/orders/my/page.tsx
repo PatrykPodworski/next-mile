@@ -1,7 +1,4 @@
-import getServerSession from "@/app/api/auth/[...nextauth]/getServerSession";
-import UserOrderCard, {
-  UserOrderCardProps,
-} from "@/components/Orders/UserOrderCard";
+import { notFound } from "next/navigation";
 import apolloClient from "@/graphql/apolloClient";
 import { useFragment as getFragmentData } from "@/graphql/generated";
 import {
@@ -11,7 +8,8 @@ import {
   UserOrderFragmentDoc,
   UserOrderFragment,
 } from "@/graphql/generated/graphql";
-import { notFound } from "next/navigation";
+import getServerSession from "@/app/api/auth/[...nextauth]/getServerSession";
+import UserOrderCard, { UserOrderCardProps } from "./UserOrderCard";
 
 const MyOrdersPage = async () => {
   const session = await getServerSession();
