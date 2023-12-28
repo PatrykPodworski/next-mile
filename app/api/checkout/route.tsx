@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
 import Stripe from "stripe";
 import { ValidationError } from "yup";
-import { authOptions } from "@/_pages/api/auth/[...nextauth]";
 import apolloClient from "@/graphql/apolloClient";
 import { useFragment as getFragmentData } from "@/graphql/generated";
 import {
@@ -18,6 +16,7 @@ import {
   GetCartProductsQueryVariables,
 } from "@/graphql/generated/graphql";
 import bodySchema, { Item } from "./bodySchema";
+import getServerSession from "../auth/[...nextauth]/getServerSession";
 
 // TODO: Refactor
 export const POST = async (request: NextRequest) => {
@@ -70,7 +69,7 @@ export const POST = async (request: NextRequest) => {
       );
     }
 
-    const session = await getServerSession(authOptions);
+    const session = await getServerSession();
     const userId = session?.user?.id;
 
     await apolloClient.mutate<
