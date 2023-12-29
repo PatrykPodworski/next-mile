@@ -1,7 +1,7 @@
 const HomePage = () => {
   return (
     <>
-      <main className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center">
         <h1 className="text-4xl font-bold" data-testid="success-heading">
           Welcome to Our Online Store!
         </h1>
@@ -10,7 +10,7 @@ const HomePage = () => {
           that will help you enhance your skills and knowledge. Still, you
           can&apos;t but anything.
         </p>
-      </main>
+      </div>
     </>
   );
 };
