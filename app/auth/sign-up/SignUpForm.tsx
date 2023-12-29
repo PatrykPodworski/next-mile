@@ -29,7 +29,7 @@ const SignUpForm = () => {
         {...register("password")}
       />
       <div className="flex gap-2 items-baseline my-4">
-        <button className="btn btn-primary btn-sm" onClick={submit}>
+        <button className="btn btn-sm border-neutral-300" onClick={submit}>
           Sign up
         </button>
         <Link
