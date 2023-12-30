@@ -1,4 +1,4 @@
-const confirmEmailPage = () => {
+const ConfirmEmailPage = () => {
   return (
     <>
       <div className="flex flex-col justify-center items-center">
@@ -14,4 +14,4 @@ const confirmEmailPage = () => {
   );
 };
 
-export default confirmEmailPage;
+export default ConfirmEmailPage;

@@ -1,6 +1,6 @@
 import emailSchema from "@/utils/emailSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { InferType, object, string } from "yup";
 
@@ -12,6 +12,7 @@ const useSignUpForm = () => {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
+  const router = useRouter();
 
   const submit = handleSubmit(async (data) => {
     const response = await fetch("/api/users", {
@@ -26,7 +27,7 @@ const useSignUpForm = () => {
       throw new Error(JSON.stringify(await response.json()));
     }
 
-    redirect("/auth/confirm-email");
+    router.push("/auth/confirm-email");
   });
 
   return { register, errors, submit };
