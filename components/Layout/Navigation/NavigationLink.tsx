@@ -32,7 +32,7 @@ const NavigationLink = ({
 };
 
 const isActiveRoute = (route: string, href: string) => {
-  if (route === "/") {
+  if (href === "/") {
     return route === href;
   }
   return route.startsWith(href);
