@@ -1,6 +1,6 @@
 "use client";
 import clsx from "clsx";
-import TextInput from "../inputs/TextInput";
+import TextInput from "@/components/inputs/TextInput";
 import useReviewForm from "./useReviewForm";
 
 const ReviewForm = ({ slug }: ReviewFormProps) => {

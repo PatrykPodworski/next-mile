@@ -1,7 +1,6 @@
 import AddToCartButton from "@/components/Courses/Card/AddToCartButton";
 import CourseImage from "@/components/Courses/CourseImage";
 import Markdown from "@/components/Markdown";
-import ReviewsContainer from "@/components/ReviewsContainer";
 import ChevronLeft from "@/components/icons/ChevronLeft";
 import apolloClient from "@/graphql/apolloClient";
 import { useFragment as getFragmentData } from "@/graphql/generated";
@@ -13,6 +12,7 @@ import {
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ReviewsContainer from "./ReviewsContainer";
 
 const CourseDetailsPage = async ({ params: { slug } }: Props) => {
   const product = await getCourseDetails(slug);
