@@ -1,9 +1,13 @@
+import Container from "@/components/Layout/Container";
+import Heading from "@/components/Layout/Heading";
+import Paragraph from "@/components/Layout/Paragraph";
+
 const CancelPage = () => {
   return (
-    <main className="flex flex-col justify-center items-center">
-      <h1 className="text-4xl font-bold">Order Canceled</h1>
-      <p className="text-lg">Your order has been canceled.</p>
-    </main>
+    <Container>
+      <Heading>Order Canceled</Heading>
+      <Paragraph>Your order has been canceled.</Paragraph>
+    </Container>
   );
 };
 

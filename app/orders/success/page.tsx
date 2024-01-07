@@ -1,11 +1,13 @@
+import Container from "@/components/Layout/Container";
+import Heading from "@/components/Layout/Heading";
+import Paragraph from "@/components/Layout/Paragraph";
+
 const SuccessPage = () => {
   return (
-    <div className="flex flex-col justify-center items-center">
-      <h1 className="text-4xl font-bold" data-testid="success-heading">
-        Success!
-      </h1>
-      <p className="text-lg">Your order has been processed.</p>
-    </div>
+    <Container>
+      <Heading data-testid="success-heading">Success!</Heading>
+      <Paragraph>Your order has been processed.</Paragraph>
+    </Container>
   );
 };
 

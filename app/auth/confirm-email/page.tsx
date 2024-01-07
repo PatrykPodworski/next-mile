@@ -1,15 +1,19 @@
+import Container from "@/components/Layout/Container";
+import Heading from "@/components/Layout/Heading";
+import Paragraph from "@/components/Layout/Paragraph";
+
 const ConfirmEmailPage = () => {
   return (
     <>
-      <div className="flex flex-col justify-center items-center">
-        <h1 className="text-4xl font-bold" data-testid="success-heading">
+      <Container>
+        <Heading data-testid="success-heading">
           Thank you for creating an account!
-        </h1>
-        <p className="text-lg">
+        </Heading>
+        <Paragraph>
           Please check your email and click on the confirmation link to activate
           your account.
-        </p>
-      </div>
+        </Paragraph>
+      </Container>
     </>
   );
 };

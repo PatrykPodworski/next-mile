@@ -1,11 +1,13 @@
+import Container from "@/components/Layout/Container";
+import Heading from "@/components/Layout/Heading";
+import Paragraph from "@/components/Layout/Paragraph";
+
 const AboutPage = () => {
   return (
-    <div className="flex flex-col justify-center items-center">
-      <h1 className="text-4xl font-bold" data-testid="success-heading">
-        This is the about page.
-      </h1>
-      <p className="text-lg">It&apos;s not a real store.</p>
-    </div>
+    <Container>
+      <Heading>This is the about page.</Heading>
+      <Paragraph>It&apos;s not a real store.</Paragraph>
+    </Container>
   );
 };
 
