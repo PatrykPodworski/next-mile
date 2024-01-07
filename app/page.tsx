@@ -1,16 +1,18 @@
+import Container from "@/components/Layout/Container";
+import Heading from "@/components/Layout/Heading";
+import Paragraph from "@/components/Layout/Paragraph";
+
 const HomePage = () => {
   return (
     <>
-      <div className="flex flex-col justify-center items-center">
-        <h1 className="text-4xl font-bold" data-testid="success-heading">
-          Welcome to Our Online Store!
-        </h1>
-        <p className="text-lg text-gray-600 max-w-prose">
+      <Container>
+        <Heading>Welcome to Our Online Store!</Heading>
+        <Paragraph>
           Explore our vast collection of courses and discover the perfect topics
           that will help you enhance your skills and knowledge. Still, you
           can&apos;t but anything.
-        </p>
-      </div>
+        </Paragraph>
+      </Container>
     </>
   );
 };
