@@ -1,5 +1,4 @@
 import CourseImage from "@/components/Courses/CourseImage";
-import { CartItem } from "./context/CartContext";
 import useCartState from "./context/useCartState";
 import { CartProductFragment } from "@/graphql/generated/graphql";
 
@@ -12,39 +11,37 @@ const CartListItem = ({
   quantity,
 }: CartListItemProps) => {
   const { addItem, removeItem } = useCartState();
-
   const imageUrl = images[0]?.url;
 
   return (
-    <div className="flex items-center gap-8 border-neutral-200 border-t py-8">
+    <div className="flex items-center gap-3 border-neutral-300 border-t pt-5 first:border-0">
       {imageUrl && (
         <CourseImage
           src={imageUrl}
           alt={name}
-          className="shadow-md w-40"
+          className="w-40 rounded-lg overflow-hidden shrink-0"
           sizes="160"
         />
       )}
-      <div className="w-96">
+      <div className="grow">
         <p className="text-lg font-bold text-neutral-900">{name}</p>
-        <p className="truncate text-neutral-900">{description}</p>
+        <p className="text-neutral-900 truncate max-w-lg">{description}</p>
         <p className="font-bold text-neutral-900">{price / 100} zł</p>
       </div>
-      <div className="btn-group btn-group-horizontal text-neutral-900">
+      <div className="shrink-0 flex flex-col">
         <button
-          className="btn btn-sm btn-outline hover:btn-primary border-neutral-200"
-          onClick={() => removeItem(id)}
-        >
-          -
-        </button>
-        <div className="border-y border-neutral-200 h-8 px-3 flex items-center">
-          {quantity}
-        </div>
-        <button
-          className="btn btn-sm btn-outline hover:btn-primary border-neutral-200"
+          className="btn btn-sm border-neutral-300"
           onClick={() => addItem(id)}
         >
           +
+        </button>
+        <div className="h-8 px-3 flex items-center">{quantity}</div>
+
+        <button
+          className="btn btn-sm border-neutral-300"
+          onClick={() => removeItem(id)}
+        >
+          -
         </button>
       </div>
     </div>

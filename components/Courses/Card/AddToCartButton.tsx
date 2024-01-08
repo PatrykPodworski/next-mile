@@ -1,3 +1,5 @@
+"use client";
+
 import PlusIcon from "@/components/icons/PlusIcon";
 import { CartItem } from "@/components/Cart/context/CartContext";
 import useCartState from "@/components/Cart/context/useCartState";
@@ -24,7 +26,7 @@ const AddToCartButton = ({ id, size }: AddToCartButtonProps) => {
 
   return (
     <button
-      className="btn-ghost btn btn-sm"
+      className="btn-ghost btn btn-sm hover:bg-neutral-100"
       data-testid="addToCartIconButton"
       onClick={onClick}
     >

@@ -14,7 +14,7 @@ const LinkPagination = ({
   }
 
   return (
-    <ul className="btn-group w-full justify-center">
+    <ul className="flex items-center">
       <LinkPaginationItem
         href={`${baseHref}/${current - 1 > 0 ? current - 1 : 1}`}
       >

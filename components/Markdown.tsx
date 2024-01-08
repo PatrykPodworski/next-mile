@@ -1,9 +1,9 @@
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 
-const Markdown = (props: MDXRemoteSerializeResult) => (
+const Markdown = ({ source }: { source: string }) => (
   <MDXRemote
-    {...props}
+    source={source}
     components={{
       a: ({ href, ref, ...props }) => {
         if (!href || isExternalHref(href)) {

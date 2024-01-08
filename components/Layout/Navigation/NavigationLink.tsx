@@ -1,10 +1,17 @@
+"use client";
+
 import clsx from "clsx";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
-const NavigationLink = ({ href, children, className }: NavigationLinkProps) => {
-  const router = useRouter();
-  const isActive = isActiveRoute(router.pathname, href);
+const NavigationLink = ({
+  href,
+  children,
+  className,
+  activeMatch,
+}: NavigationLinkProps) => {
+  const pathName = usePathname();
+  const isActive = isActiveRoute(pathName, activeMatch ?? href);
 
   return (
     <Link
@@ -26,18 +33,16 @@ const NavigationLink = ({ href, children, className }: NavigationLinkProps) => {
 
 const isActiveRoute = (route: string, href: string) => {
   if (href === "/") {
-    return href === route;
+    return route === href;
   }
-
-  const mainRoutePart = route.split("/")[1] ?? "";
-  const mainHrefPart = href.split("/")[1] ?? "";
-  return mainRoutePart === mainHrefPart;
+  return route.startsWith(href);
 };
 
 type NavigationLinkProps = {
   href: string;
   children: React.ReactNode;
   className?: string;
+  activeMatch?: string;
 };
 
 export default NavigationLink;

@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactNode, useEffect, useState } from "react";
 import CartContext, { CartItem } from "./CartContext";
 import { getCartFromLocalStorage, setCartToLocalStorage } from "./localStorage";
